@@ -1,0 +1,84 @@
+body, .totel span, .nav a{
+    font-family: 'Microsoft Yahei','arial','sans-serif';
+}
+a {
+	/* 设置没有下划线 */
+    text-decoration: none;
+    color: #24d;
+}
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+}
+
+div {
+    display: block;
+}
+.top{
+	position: relative;
+	/*z-index 属性设置元素的堆叠顺序。拥有更高堆叠顺序的元素总是会处于堆叠顺序较低的元素的前面*/
+	z-index:31;
+}
+.w{
+	width:1190px;
+	/* margin后面如果只有两个参数的话，第一个表示top和bottom，第二个表示left和right
+因为0 auto，表示上下边界为0，左右则根据宽度自适应相同值（即居中） */
+	margin: 0 auto;
+}
+.logo{
+	height:80px;
+	background: url('/Car/img/logo.png') no-repeat left top;
+}
+.totel
+{
+	float:right;
+	line-height:80px;
+	height:80px;
+	overflow:hidden;
+}
+.totel span
+{
+	vertical-align:top;
+	font-size:16px;
+}
+.totel em
+{
+	font-size: 24px;
+	color:#22ac38;
+	font-style:italic;
+	display:inline-block;
+	width:166px;
+}
+.toindex
+{
+	height:80px;
+	float:left;
+	width:256px;
+}
+.around-city{
+	float:left;
+	margin:31px 0 0 60px;
+	color:#666;
+}
+.around-city a{
+	color:#666;
+	margin:0 10px;
+}
+.nav{
+	height:46px;
+	line-height:46px;
+	background:#22ac38;
+}
+.nav .w
+{
+	/*去掉inline-block元素之间的空隙*/
+	font-size:0;
+}
+.nav a{
+	display: inline-block;
+	font-size:20px;
+	color:#fff;
+	padding:0 30px;
+}

@@ -1,0 +1,267 @@
+.laybox{
+	margin:30px auto;
+}
+.det-sumleft{
+	width:600px;
+	float:left;
+}
+.dt-sumpic, .det-picside {
+    width: 600px;
+    height: 400px;
+    position: relative;
+    overflow: hidden;
+}
+.det-picside li img {
+    vertical-align: middle;
+    max-width: 600px;
+    height: auto;
+}
+
+.det-sumright {
+    width: 540px;
+    float: right;
+}
+.dt-titbox {
+    border-bottom: solid 1px #ddd;
+    _overflow: hidden;
+    _width: 540px;
+}
+.dt-titletype {
+    font-size: 24px;
+    color: #333;
+    font-weight: bold;
+    line-height: 34px;
+    margin-bottom: 14px;
+    font-family: "Microsoft Yahei";
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.title-info-r {
+    float: right;
+    height: 26px;
+}
+.clearfix:after {
+    content: "\0020";
+    display: block;
+    clear: both;
+    height: 0;
+    visibility: hidden;
+}
+.basic-box {
+    padding: 10px 0 0;
+    margin-bottom: 20px;
+    background: #fafafa;
+}
+.pricebox {
+    margin: 0;
+    line-height: 30px;
+    padding-bottom: 10px;
+    height: 38px;
+}
+.stipul-p {
+    margin: 35px 0 20px;
+}
+
+.ico-mt {
+    margin-top: 7px;
+}
+.ico-txt {
+    display: inline-block;
+    width: 58px;
+    height: 18px;
+    border: 1px solid #aaa;
+    font-size: 12px;
+    color: #666;
+    line-height: 18px;
+    text-align: center;
+    margin: 0 10px;
+    float: left;
+}
+.pricestype {
+    font-weight: bold;
+    font-size: 30px;
+    font-family: "Microsoft Yahei";
+}
+.fc-org {
+    color: #f60;
+}
+.numtype {
+    vertical-align: -2px;
+    margin-right: 3px;
+    font-size: 36px;
+    font-family: Arial;
+}
+.f30 {
+    font-size: 30px;
+}
+.f14 {
+    font-size: 14px;
+}
+.f18 {
+    font-size: 18px;
+}
+
+.car-fuwu {
+    height: 20px;
+    padding-bottom: 8px;
+    line-height: 20px;
+}
+.car-fuwu span {
+    color: #666;
+    font-size: 14px;
+}
+.yahei {
+    font-family: "Microsoft Yahei";
+}
+.teltype {
+    font-size: 24px;
+    color: #666;
+}
+.combox {
+    border: solid 1px #ddd;
+}
+.indem-box {
+    height: 173px;
+}
+.indem-tt {
+    height: 36px;
+    background-color: #f9f9f9;
+    line-height: 36px;
+    padding: 0 20px;
+}
+.indem-ul {
+    overflow: hidden;
+    zoom: 1;
+    margin: 20px 0 0 0;
+}
+.indem-ul li {
+    width: 178px;
+    text-align: center;
+    line-height: 20px;
+    float: left;
+}
+.indem01, .indem02, .indem03 {
+    background: url(/Car/img/detail-hc-new.png) no-repeat;
+    width: 36px;
+    height: 36px;
+    display: block;
+    margin: 0 auto;
+}
+.indem02 {
+    background-position: 0 -45px;
+}
+.indem03 {
+    background-position: 0 -89px;
+}
+
+.f-type01 {
+    color: #22ac38;
+    font-weight: 700;
+    font-size: 14px;
+    margin: 10px 0 0 0;
+}
+
+.assort li.one {
+    border-left: solid 1px #eee;
+    width: 133px;
+}
+.assort li {
+    float: left;
+    width: 100px;
+    border-right: solid 1px #eee;
+    text-align: center;
+    color: #999;
+    line-height: 22px;
+}
+.assort li b {
+    display: block;
+    color: #666;
+    font-size: 16px;
+    font-family: "Microsoft Yahei";
+}
+.stipul-btn {
+    width: 115px;
+    height: 48px;
+    line-height: 48px;
+    color: #fff;
+    font-family: "Microsoft Yahei";
+    background-color: #fd8000;
+    text-align: center;
+    display: inline-block;
+    font-size: 18px;
+    margin-right: 5px;
+}
+.modbox {
+    margin: 34px 0 0 0;
+}
+.publicTit {
+    font-size: 16px;
+    line-height: 28px;
+    margin: 0 0 10px 0;
+}
+.deck {
+    height: 16px;
+    width: 4px;
+    font-size: 0;
+    background-color: #22ac38;
+    margin-right: 8px;
+    vertical-align: -2px;
+    display: inline-block;
+}
+.con-param-s {
+    margin-right: -16px;
+    margin-bottom: -30px;
+}
+.c-param-in {
+    width: 386px;
+    float: left;
+    padding: 0 16px 30px 0;
+}
+.dt-pictype {
+    margin: 14px -10px 20px 0;
+}
+.dt-pictype img {
+    max-width: 590px;
+    max-height: 400px;
+    margin: 0 10px 10px 0;
+    vertical-align: top;
+}
+tbody {
+    display: table-row-group;
+    vertical-align: middle;
+    border-color: inherit;
+}
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+th {
+    font-weight: bold;
+}
+user agent stylesheettd, th {
+    display: table-cell;
+    vertical-align: inherit;
+}
+.param-table th {
+    background-color: #f5f5f5;
+    font-size: 14px;
+}
+.param-table td, .param-table th {
+    border: solid 1px #ddd;
+    height: 32px;
+    line-height: 16px;
+}
+tr {
+    display: table-row;
+    vertical-align: inherit;
+    border-color: inherit;
+}
+.param-table td.td1 {
+    padding: 0 0 0 25px;
+    width: 42%;
+}
+.param-table td.td2 {
+    padding: 0 0 0 25px;
+    width: 58%;
+}

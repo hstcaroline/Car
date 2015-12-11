@@ -1,0 +1,373 @@
+ol,ul,li {
+	list-style: none;
+}
+
+.select-area {
+	min-width: 1390px;
+}
+
+.top-img {
+	position: relative;
+	height: 388px;
+}
+
+.banimgBox1,.banimgBox2 {
+	height: 388px;
+	width: 100%;
+}
+
+.ban_a {
+	display: block;
+	width: 100%;
+	height: 388px;
+}
+
+a {
+	text-decoration: none;
+	color: #24d;
+}
+
+.banimgBox2 {
+	background: #feffef url('../img/1.jpg') no-repeat center top;
+	background-size: cover;
+	width: 100%;
+}
+
+.por {
+	positive: relative;
+}
+.top-title {
+	color: #fff;
+	right: 150px;
+	top: 140px;
+}
+
+.poa {
+	position: absolute;
+}
+
+.top-title h1 {
+	right: 80px;
+	font-size: 50px;
+	line-height: 50px;
+	font-weight: bold;
+}
+
+.top-info {
+	font-size: 18px;
+	color: #fff;
+	line-height: 40px;
+	margin-top: 20px;
+}
+
+.top-info a {
+	display: inline-block;
+	height: 36px;
+	line-height: 36px;
+	width: 130px;
+	text-align: center;
+	border-radius: 5px;
+	margin-left: 57px;
+	font-size: 16px;
+	border: 2px solid #fff;
+	color: #fff;
+	background: rgba(255, 255, 255, .1);
+}
+
+.c-info {
+	height: 75px;
+	background: #fff;
+}
+
+ul,menu,dir {
+	display: block;
+	list-style-type: disc;
+	-webkit-margin-before: 1em;
+	-webkit-margin-after: 1em;
+	-webkit-margin-start: 0px;
+	-webkit-margin-end: 0px;
+	-webkit-padding-start: 40px;
+}
+
+.c-info li {
+	margin-top: 15px;
+	height: 45px;
+	float: left;
+	_display: inline;
+	_overflow: hidden;
+}
+
+.c-info li {
+	background-image: url('../img/index_v2-new.png');
+	background-repeat: no-repeat;
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.c-info li.icon01 {
+	width: 270px;
+	background-position: -243px -116px;
+	margin-left: 80px;
+}
+
+.c-info li.icon02 {
+	width: 270px;
+	background-position: -243px -162px;
+}
+
+.c-info li.icon03 {
+	width: 270px;
+	background-position: -243px -210px;
+}
+
+.c-info li.icon04 {
+	width: 270px;
+	background-position: -243px -252px;
+}
+
+.c-info span {
+	margin-left: 55px;
+	display: block;
+	color: #666;
+	font: 16px/45px 'Microsoft YaHei';
+	margin-bottom: 9px;
+	overflow: hidden;
+}
+
+.listbody {
+	background: #f5f5f5;
+	padding-top: 35px;
+	padding-bottom: 1px;
+}
+
+.title {
+	height: 32px;
+}
+
+.f14 {
+	font-size: 14px;
+}
+
+.fr {
+	float: right;
+}
+
+.title .fr a {
+	color: #666;
+}
+.title strong{
+	font-size:18px;
+}
+.more {
+	font-family: 'sans-serif';
+}
+
+address, cite, code, dfn, em, var, i {
+    font-style: normal;
+}
+.ti-left {
+	color: #333;
+}
+.ti-left a
+{
+	color:#666;
+	font-size:14px;
+	padding:0 20px;
+}
+strong
+{
+	font-weight:bold;
+}
+.list-bigimg{
+	margin-left:-10px;
+}
+.list-bigimg li {
+    height: 315px;
+    width: 290px;
+    float: left;
+    margin-right: 10px;
+    margin-bottom:15px;
+    _display: inline;
+    position: relative;
+    z-index: 2;
+}
+.list-infoBox {
+    background: #fff;
+    padding-bottom: 15px;
+    position: relative;
+    z-index: 2;
+}
+img[Attributes Style] {
+    width: 290px;
+    height: 192px;
+}
+.list-infoBox p {
+    padding: 0 10px;
+}
+
+.infoBox {
+    font-size: 16px;
+    line-height: 1em;
+    margin: 14px 0 9px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    width: 270px;
+    white-space: nowrap;
+}
+.info-title {
+    color: #333;
+    font-size: 14px;
+}
+.list-infoBox  {
+    color: #999;
+    height:300px
+}
+.list-infoBox p {
+    padding: 0 10px;
+}
+.shuxian {
+    color: #ddd;
+    margin: 0 6px;
+}
+.priType{
+	font-size:18px;
+	font-family:'Arial';
+}
+.priType-s {
+    margin-top: 10px;
+}
+.priType-s span {
+    font-size: 16px;
+    color: #f60;
+    margin-right: 10px;
+    background: url('../img/q.png') no-repeat 0 center;
+    padding-left: 15px;
+}
+.fc-org{
+	color:#f60;
+}
+.priType-s span.ctag-org {
+    line-height: 12px;
+    padding: 0 2px 0 0;
+    background: 0;
+    font-size: 12px;
+    border: 1px solid #f60;
+}
+.priType-s span.ctag-org i {
+    padding: 0 2px 0 1px;
+    line-height: 12px;
+    font-weight: normal;
+    color: #fff;
+    background: #f60;
+    margin-right: 1px;
+}
+.priType-s s {
+    color: #999;
+    font-size: 13px;
+}
+.view-more{
+	   position: relative;
+	   width:1190px;
+	   height:945px;
+}
+.view-more a {
+    color: #fff;
+    font-size: 18px;
+    height: 48px;
+    line-height: 48px;
+    text-align: center;
+     margin: 30px auto 40px auto;
+    /* width: 250px; */
+   /* display: block; */
+    background-color: #22ac38;
+    border-radius: 5px;
+}
+/* 显示所有车 */
+.seqBox {
+    margin: 20px 0 10px 10px;
+    font-family: 'Microsoft yahei';
+}
+.seqtype {
+    color: #999;
+    line-height: 34px;
+}
+.seqtype b {
+    margin: 0 5px;
+}
+.sequen li {
+    float: left;
+    height: 32px;
+}
+.sequen li.first a {
+    color: #22ac38;
+    font-weight: bold;
+}
+.sequen li a i.up {
+    background-position: 0 -16px;
+}
+
+.sequen a {
+    border: solid 1px #ddd;
+    color: #666;
+    display: inline-block;
+    position: relative;
+    margin-left: -1px;
+    padding: 6px 20px;
+    _line-height: 18px;
+    _height: 18px;
+    _padding: 10px 20px 2px 20px;
+}
+.clearfix:after {
+    content: "\0020";
+    display: block;
+    clear: both;
+    height: 0;
+    visibility: hidden;
+}
+.pageLink {
+    margin: 20px 0 50px 0;
+    clear: both;
+    text-align: center;
+}
+.pageLink li {
+    display: inline;
+    margin: 0 0 0 7px;
+}
+.pageLink li a {
+    background: #f5f5f5;
+    border: 1px solid #ddd;
+    height: 34px;
+    line-height: 34px;
+    padding: 0 15px;
+    font-size: 14px;
+    color: #4b4b4b;
+    vertical-align: top;
+    display: inline-block;
+    font-weight: normal;
+}
+.pageLink a.linkOn {
+    background: #22ac38;
+    border-color: #22ac38;
+    color: #fff;
+    text-decoration: none;
+}
+.publicTit {
+    font-size: 16px;
+    line-height: 28px;
+    margin: 0 0 10px 0;
+}
+.yahei {
+    font-family: "Microsoft Yahei";
+}
+.deck {
+    height: 16px;
+    width: 4px;
+    font-size: 0;
+    background-color: #22ac38;
+    margin-right: 8px;
+    vertical-align: -2px;
+    display: inline-block;
+}
+
+

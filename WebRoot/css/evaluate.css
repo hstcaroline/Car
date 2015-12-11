@@ -1,0 +1,329 @@
+.assess-wrap {
+    width: 780px;
+    padding: 30px 159px;
+    margin: 30px auto 20px;
+    border-radius: 8px;
+    background: #fff;
+    border: 1px solid #e4e4e4;
+}
+.assess-wrap .ass-tit {
+    width: 780px;
+    border-bottom: 1px solid #e5e5e5;
+    margin-top: 60px;
+}
+.assess-wrap .ass-tit h3 {
+    font: normal 24px/40px "Microsoft YaHei";
+    color: #333;
+    display: inline-block;
+}
+.assess-wrap .ass-car, .assess-wrap .ass-result {
+    width: 730px;
+    margin: 30px 15px;
+}
+.ass-car {
+    height: 290px;
+}
+a.car-query {
+    display: block;
+    width: 220px;
+    margin: 0 auto;
+    height: 34px;
+    border-radius: 4px;
+    text-align: center;
+    background: #22ac38;
+    color: #fff;
+    font: normal 16px/34px "Microsoft Yahei";
+}
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    display:table;
+    border-color:grey;
+}
+tbody {
+    display: table-row-group;
+    vertical-align: middle;
+    border-color: inherit;
+}
+tr {
+    display: table-row;
+    vertical-align: inherit;
+    border-color: inherit;
+}
+.ass-car td {
+    padding-top: 30px;
+    position: relative;
+}
+.ass-car td.title {
+    color: #888;
+    font: normal 14px/34px "Microsoft YaHei";
+    text-align: right;
+    padding-right: 15px;
+}
+label {
+    cursor: default;
+}
+.ass-car td.msg {
+    position: relative;
+}
+.ass-car td.msg .clearfix {
+    float: left;
+}
+.clearfix:before, .clearfix:after {
+    content: "";
+    display: table;
+}
+.ass-car td.msg .bcar {
+    width: 150px;
+    height: 34px;
+    text-indent: 15px;
+    border: 1px solid #e5e5e5;
+    margin-left: 10px;
+    font: normal 14px/34px "Microsoft Yahei";
+    color: #333;
+    cursor: pointer;
+}
+input, button, select, textarea {
+    outline: none;
+}
+option {
+    font-weight: normal;
+}
+user agent stylesheetoption {
+    font-weight: normal;
+    display: block;
+    padding: 0px 2px 1px;
+    white-space: pre;
+    min-height: 1.2em;
+}
+.ass-car td.msg .i-text2 {
+    border: 1px solid #e5e5e5;
+    text-indent: 15px;
+    font: normal 14px/34px "Microsoft Yahei";
+    color: #333;
+    height: 34px;
+    margin-left: 10px;
+    width:288px;
+}
+a {
+    text-decoration: none;
+    outline: none;
+    blr: expression(this.onFocus=this.blur());
+    cursor: pointer;
+}
+address, caption, cite, code, dfn, em, strong, th, var {
+    font-style: normal;
+    font-weight: normal;
+}
+input.getNum {
+    height: 36px;
+    width: 150px;
+    color: #333;
+    background: none;
+    border: 1px solid #e5e5e5;
+    margin-left: 5px;
+    text-align: center;
+    cursor: pointer;
+    font: normal 14px/34px "Microsoft YaHei";
+    display: inline-block;
+}
+.ipt-box {
+    vertical-align: middle;
+    margin-left: 10px;
+    height: 18px;
+    width: 288px;
+    border: 1px solid #e5e5e5;
+    font: normal 14px/34px "Microsoft YaHei";
+    color: #bfbfbf;
+    line-height: 18px;
+    padding: 7px 10px;
+}
+
+
+/* 日历 */
+.tcalInput {
+	background: url('/Car/img/calendar/icon2.png') 100% 50% no-repeat;
+	/* padding-right: 20px; */
+	width: 309px;
+	cursor: pointer;
+	border: 1px solid #e5e5e5;
+    text-indent: 15px;
+    font: normal 14px/34px "Microsoft Yahei";
+    color: #333;
+    height: 34px;
+    margin-left: 10px;
+}
+/* additional properties for input boxe in activated state, above still applies unless in conflict */
+.tcalActive {
+	background-image: url('/Car/img/calendar/icon2.png');
+}
+/* container of calendar's pop-up */
+#tcal {
+	position: absolute;
+	visibility: hidden;
+	z-index: 100;
+	width: 300px;
+	height:200px;
+	background-color: white;
+	margin-top: 2px;
+	padding: 0 2px 2px 2px;
+	border: 1px solid silver;
+	-moz-box-shadow: 3px 3px 4px silver;
+	-webkit-box-shadow: 3px 3px 4px silver;
+	box-shadow: 3px 3px 4px silver;
+	-ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='silver')";
+ filter: progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='silver');
+}
+/* table containing navigation and current month */
+#tcalControls {
+	border-collapse: collapse;
+	border: 0;
+	width: 100%;
+}
+#tcalControls td {
+	border-collapse: collapse;
+	border: 0;
+	padding: 0;
+	width: 16px;
+	background-position: 50% 50%;
+	background-repeat: no-repeat;
+	cursor: pointer;
+}
+#tcalControls th {
+	border-collapse: collapse;
+	border: 0;
+	padding: 0;
+	line-height: 25px;
+	font-size: 10px;
+	text-align: center;
+	font-family: Tahoma, Geneva, sans-serif;
+	font-weight: bold;
+	white-space: nowrap;
+}
+#tcalPrevYear {
+	background-image: url('/Car/img/calendar/prev_year.gif');
+}
+#tcalPrevMonth {
+	background-image: url('/Car/img/calendar/prev_mon.gif');
+}
+#tcalNextMonth {
+	background-image: url('/Car/img/calendar/next_mon.gif');
+}
+#tcalNextYear {
+	background-image: url('/Car/img/calendar/next_year.gif');
+}
+/* table containing week days header and calendar grid */
+#tcalGrid {
+	border-collapse: collapse;
+	border: 1px solid silver;
+	width: 100%;
+	height:88%;
+}
+#tcalGrid th {
+	border: 1px solid silver;
+	border-collapse: collapse;
+	padding: 3px 0;
+	text-align: center;
+	font-family: Tahoma, Geneva, sans-serif;
+	font-size: 10px;
+	background-color: #42A93F;
+	color: white;
+}
+#tcalGrid td {
+	border: 0;
+	border-collapse: collapse;
+	padding: 2px 0;
+	text-align: center;
+	font-family: Tahoma, Geneva, sans-serif;
+	width: 14%;
+	font-size: 11px;
+	cursor: pointer;
+}
+#tcalGrid td.tcalOtherMonth {
+	color: silver;
+}
+#tcalGrid td.tcalWeekend {
+	background-color: #ACD6F5;
+}
+#tcalGrid td.tcalToday {
+	border: 1px solid red;
+}
+#tcalGrid td.tcalSelected {
+	background-color: #FFB3BE;
+}	
+/* 日历 */
+.ass-new {
+    height: 260px;
+    width: 780px;
+    margin-top: 60px;
+}
+.ass-new img {
+    width: 300px;
+    height: 200px;
+    float: left;
+    border: 1px solid #e5e5e5;
+    border-radius: 2px;
+    -webkit-border-radius: 2px;
+}
+.ass-new .txt {
+    float: left;
+    margin-left: 30px;
+}
+.ass-new .txt h2 {
+    font: normal 20px/30px "Microsoft Yahei";
+    color: #333;
+}
+.ass-new .txt p, .assess-wrap h4 {
+    font: normal 14px/30px "Microsoft Yahei";
+    color: #888;
+}
+.ass-new .txt ul {
+    height: 80px;
+    padding: 20px 0;
+    margin-top: 20px;
+    border: 1px solid #e5e5e5;
+    border-radius: 2px;
+    -webkit-border-radius: 2px;
+}
+.ass-new .txt ul li {
+    width: 180px;
+    float: left;
+    text-align: center;
+}
+.br {
+    border-right: 1px solid #e5e5e5;
+}
+.ass-new .txt ul li span {
+    font: normal 16px/30px "Microsoft Yahei";
+    color: #333;
+    display: block;
+}
+.ass-new .txt ul li b {
+    font: bold 30px/50px "Microsoft Yahei";
+    color: #333;
+}
+a.car-query {
+    display: block;
+    width: 220px;
+    margin: 0 auto;
+    height: 34px;
+    border-radius: 4px;
+    text-align: center;
+    background: #22ac38;
+    color: #fff;
+    font: normal 16px/34px "Microsoft Yahei";
+}
+.assess-wrap .ass-tip {
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 100px;
+    font: normal 14px/24px "Microsoft Yahei";
+    color: #666;
+}
+.ass-new .txt ul li em {
+    font: bold 30px/50px "Microsoft Yahei";
+    color: #ff5a37;
+}
+
+
+
