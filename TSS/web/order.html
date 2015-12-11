@@ -1,0 +1,294 @@
+<!--A Design by W3layouts
+Author: W3layout
+Author URL: http://w3layouts.com
+License: Creative Commons Attribution 3.0 Unported
+License URL: http://creativecommons.org/licenses/by/3.0/
+-->
+<!DOCTYPE html>
+<html style="text-align:center">
+<head>
+<title>旅游出行服务系统</title>
+<!--bootstarp-css-->
+<link href="./css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+<!--/bootstarp-css -->
+<link rel="stylesheet" href="./css/style.css" type="text/css" media="all" />
+<link rel="stylesheet" href="./css/kendo.common.min.css" type="text/css" media="all" />
+
+<link rel="stylesheet" href="./css/kendo.blueopal.min.css" />
+<!--js-->
+<!-- Custom Theme files -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8" />
+
+<script type="text/javascript" src="./js/jquery.min.js"></script>
+<script type="text/javascript" src="./js/easing.js"></script>
+<script type="text/javascript" src="./js/bootstrap.js"></script>
+<script type="text/javascript" src="./js/kendo.datetimepicker.min.js"></script>
+<script type="text/javascript" src="./js/kendo.all.min.js"></script>
+<script type="text/javascript" src="http://202.120.40.175:40013/RMP/function/Attribute.js"></script>
+<script type="text/javascript" src="http://202.120.40.175:40013/RMP/function/Resource.js"></script>
+<script type="text/javascript" src="http://202.120.40.175:40013/RMP/function/ResourceCollection.js"></script>
+<script type="text/javascript" src="http://202.120.40.175:40013/RMP/function/jquery.cookie.js"></script>
+
+<!--/js-->
+
+<!-- animated-css -->
+<link href="./css/animate.css" rel="stylesheet" type="text/css" media="all">
+
+
+<!-- /animated-css -->
+<style>
+table{
+	color: #fff;
+}
+	th{
+		text-align:center;
+	}
+</style>
+
+<script>
+$(document).ready(function () {
+
+    var userid = $.cookie("id");
+    var me = Resource.createNew("U1384e58c235bee/TSS/User/" + userid);
+    me.GET();
+    // var objs = me.listSubresources();
+    var objs = me.listSpecificSubresources("RestaurantRequest");
+
+    if(objs.length > 0){
+      var rd = objs[0].getAttribute("RequestDate");
+      // alert(objs[0].getAttribute("RequestDate"));
+
+      var resourcecollection = ResourceCollection.createNew("U1384e58c235bee/TSS/Restaurant/");
+      resourcecollection.addLike("RestaurantRequest.RequestDate",rd);
+      resourcecollection.GET();
+
+      var rest = resourcecollection.getResultSet();
+
+      var content = "";
+      content += "<table class=\"table\"><thead style=\"text-align:center\"><tr><th>名称</th><th>类型</th><th>预定时间</th><th>预定人数</th><th>人均价格</th><th></th></tr></thead><tbody>";
+
+      content += "<tr>";
+      content += "<td style=\"display:none;\">" + rest[0].getId() + "</td>";
+      content += "<td>" + rest[0].getAttribute("Name") + "</td>";
+      content += "<td>"+ rest[0].getAttribute("Style") +"</td>";
+      content += "<td>" + objs[0].getAttribute("RequestDate") + "</td>";
+      content += "<td>" + objs[0].getAttribute("PeopleNumber") + "人</td>";
+      content += "<td>"+ rest[0].getAttribute("AveragePrice") +"元</td>";
+      content += "<td><button type=\"button\" class=\"btn btn-primary\" onclick=\"cancelApply(this)\">取消预定</button></td>"
+      content += "</tr>";
+      content += "</tbody></table>";
+      $("#mycarrent").html(content);
+    }
+
+    
+
+    content = "";
+    content += "<table class=\"table\"><thead style=\"text-align:center\"><tr><th>名称</th><th>类型</th><th>人均价格</th><th></th></tr></thead><tbody>";
+    var resourcecollection = ResourceCollection.createNew("U1384e58c235bee/TSS/Restaurant/"); 
+    resourcecollection.GET();
+    var result = resourcecollection.getResultSet();
+    for(var i=0;i<result.length;i++){
+      content += "<tr>";
+      content += "<td style=\"display:none;\">" + result[i].getId() + "</td>";
+      content += "<td width=\"25%\">"+ result[i].getAttribute("Name") +"</td>";
+      content += "<td width=\"25%\">"+ result[i].getAttribute("Style") +"</td>";
+      content += "<td width=\"25%\">"+ result[i].getAttribute("AveragePrice") +"元/人</td>";
+      content += "<td width=\"25%\"><button type=\"button\" class=\"btn btn-info\" onclick=\"rent(this)\">预约</button></td>";
+      content += "</tr>";
+    }
+    $("#carListTable").html(content);
+
+	// $("table button").click(function(e) {
+		
+ //          // e.target is the DOM element representing the button
+ //          var tr = $(e.target).closest("tr").children('td').first(); // get the current table row (tr)
+ //          $("#carType").val(tr.text());
+ //          alert($("#carType").val());
+          
+	// 	$('#rentModal').modal('show');
+		
+	// 		});
+
+	$("#startTime").kendoDateTimePicker({
+		format: "yyyy-MM-dd hh:mm tt"
+	});
+	// $("#endTime").kendoDateTimePicker({
+	// 	format: "yyyy-MM-dd hh:mm tt"
+	// });
+
+	$('#rentModal').on('hidden.bs.modal', function (e) {
+  // do something...
+  		$("#startTime").val('预定时间');
+  		$("#peopleNumber").val('预定人数');
+	});
+
+	$("#rentBtn").click(function(){
+		$('#rentModal').modal('hide');
+    var resource = Resource.createNew("U1384e58c235bee/TSS/RestaurantRequest/");
+    resource.setAttribute("RequestDate", $("#startTime").val());
+    resource.setAttribute("PeopleNumber", $("#peopleNumber").val());
+    resource.POST();
+    var fatherresource = Resource.createNew("U1384e58c235bee/TSS/User/" + $.cookie("id"));
+    fatherresource.GET(); 
+    var res = Resource.createNew("U1384e58c235bee/TSS/RestaurantRequest/" + resource.getId());
+    fatherresource.setSubresource(res);
+    fatherresource.PUT();
+    var motherresource = Resource.createNew("U1384e58c235bee/TSS/Restaurant/" + $("#restId").val());
+    motherresource.GET();
+    motherresource.addSubresource(res);
+    motherresource.PUT();
+    location.reload();
+	});
+});
+
+function cancelApply(e){
+  var tr = $(e).closest("tr").children('td').first();
+  $("#row").val(tr.text());
+  var resource = Resource.createNew("U1384e58c235bee/TSS/User/" + $.cookie("id"));
+  resource.GET();
+  resource.removeSingularSubresource("RestaurantRequest");
+  resource.PUT();
+  alert("删除成功");
+  location.reload();
+};	
+
+function rent(e){
+  var tr = $(e).closest("tr").children('td').first();
+  $("#restId").val(tr.text());
+  var resource = Resource.createNew("U1384e58c235bee/TSS/User/" + $.cookie("id"));
+  resource.GET();
+  var objs = resource.listSpecificSubresources("RestaurantRequest");
+  if(objs.length > 0){
+    alert("你已经提交了一个申请了！");
+  }else{
+    $("#rentModal").modal("show");
+  }
+}
+
+</script>
+
+</head>
+<body>
+<input id="row" type="hidden" value="text"/>  
+<input id="restId" type="hidden" value="text"/>  
+<input id="carType" type="hidden" value="text"/>
+<!-- datepicker  Modal -->
+<div class="modal fade" id="rentModal" tabindex="-1" role="dialog" aria-labelledby="rentModalLabel" aria-hidden="true" >
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel" style="text-align:left">预定日期选择</h4>
+      </div>
+      <div class="modal-body" style="text-align:center">
+       		
+             <div style="margin-top:10px;margin-left:46px" >
+             预定时间：<input type="text" id="startTime" class="text" value="预定时间" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '请填写预定时间';}">
+             </div>
+              <div style="margin-top:10px;" >
+             预定人数：<input type="text" id="peopleNumber" class="text" value="预定人数" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '请填写预定人数';}">
+             </div>
+             
+          
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+        <button type="button" class="btn btn-primary" id="rentBtn">确定</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- datepicker Modal end -->
+
+<!--Header-->  
+<div class="header">   	
+	<div class="container">	
+		<div class="logo">
+			<a href="#"><img src="./images/logo.png" class="img-responsive" alt=""/></a>
+			<div class="clearfix"> </div>
+		</div>
+			<div class="header-right">
+						 <div class="navigation">
+						 			<span class="menu"> </span>
+								<ul>
+									<li><a class="scroll" href="function.html" ><span>主页</span></a></li>
+									<!-- <li><a href="grouptrip.html" class="scroll" ><span>组队出行</span></a></li>
+									<li><a class="scroll" href="self-driving.html"><span>自驾游路线规划</span></a></li>
+									<li><a class="scroll" href="bustrip.html"><span>公交出行路线规划</span></a></li>
+									<li><a class="scroll" href="order.html"><span>餐饮酒店预订</span></a></li>
+									<li><a class="scroll" href="carrental.html"><span>租车服务</span></a></li>
+									<li><a class="scroll" href="recommendation.html"><span>旅游景点推荐</span></a></li> -->
+									
+								</ul>
+								
+						</div>
+						<!--script-nav -->	
+			
+					<!-- /script-nav -->
+					<!-- <div class="top-icons">
+					   <span class="icon1"> </span>
+					   <span class="icon2"> </span>
+					   <span class="icon3"> </span>
+				    </div>	 -->
+				<div class="clearfix"> </div>
+			</div>
+	</div>
+</div>			
+<!--/Header Ends Here-->
+
+<!--Get in Touch Start Here-->
+<div id="contact" class="get">
+  <div class="container"> 
+  <div class="vida">
+    <div class="touch">
+      <h5>我的预定申请</h5> 
+    </div>
+
+   <div class="contact-form" id="mycarrent" style="width:770px;margin: 0 auto">     
+      <!-- <table class="table">
+        <thead>
+            <tr>
+              <th>车辆型号</th>
+              <th>日租金</th>
+              <th>租借起始时间</th>
+              <th>租借归还时间</th>
+              <th></th>
+            </tr>
+        </thead>
+        <tbody>
+             <tr>               
+                <td>桑塔纳2000</td>
+                <td>88</td>
+                <td>20141225</td>
+                <td>20141228</td>
+                <td><button type="button" class="btn btn-info" id="car1Btn">取消申请</button></td>
+             </tr>
+        </tbody> -->
+    <!-- </table>  --> 
+
+  </div>
+
+    <div class="touch">
+      <h5>饭店信息</h5> 
+          <img src="./images/ion1.png" alt=""/>
+       
+    </div>
+      
+      <div class="contact-form" style="width:770px;margin: 0 auto" id="carListTable">
+        
+      </div>
+      <div class="clearfix"> </div>
+        </div>
+   </div>
+</div>
+<!--/Get in Touch Ends Here-->
+
+
+
+
+
+
+
+</body>
+</html>

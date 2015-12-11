@@ -40,11 +40,14 @@ json try
     //回调函数  
     function zswFun(){  
         if(xmlHttpRequest.readyState == 4 && xmlHttpRequest.status == 200){  
-            var b = xmlHttpRequest.responseText;  
-          document.getElementById("demo").innerHTML=b;
-        }  
-		
+            var result = xmlHttpRequest.responseText;  
+			showResult(result);
+        }  		
     }
+	function showResult(obj)
+	{
+	alert(obj.Car_part);
+	}
 </script>
 <p id="demo">My First query</p>
 <button type="button"  onclick="onLogin()">go</button>

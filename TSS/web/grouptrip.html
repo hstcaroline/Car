@@ -1,0 +1,361 @@
+<!--A Design by W3layouts
+Author: W3layout
+Author URL: http://w3layouts.com
+License: Creative Commons Attribution 3.0 Unported
+License URL: http://creativecommons.org/licenses/by/3.0/
+-->
+<!DOCTYPE html>
+<html style="text-align:center">
+<head>
+<title>旅游出行服务系统</title>
+<!--bootstarp-css-->
+<link href="./css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+<!--/bootstarp-css -->
+<link rel="stylesheet" href="./css/style.css" type="text/css" media="all" />
+<link rel="stylesheet" href="./css/kendo.common.min.css" type="text/css" media="all" />
+
+<link rel="stylesheet" href="./css/kendo.blueopal.min.css" />
+<!--js-->
+<!-- Custom Theme files -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8" />
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+<script type="text/javascript" src="./js/jquery.min.js"></script>
+<script type="text/javascript" src="./js/easing.js"></script>
+<script type="text/javascript" src="./js/bootstrap.js"></script>
+<script type="text/javascript" src="http://202.120.40.175:40013/RMP/function/Attribute.js"></script>
+<script type="text/javascript" src="http://202.120.40.175:40013/RMP/function/Resource.js"></script>
+<script type="text/javascript" src="http://202.120.40.175:40013/RMP/function/ResourceCollection.js"></script>
+<script type="text/javascript" src="http://202.120.40.175:40013/RMP/function/jquery.cookie.js"></script>
+<script type="text/javascript" src="./js/kendo.datetimepicker.min.js"></script>
+<script type="text/javascript" src="./js/kendo.all.min.js"></script>
+<!-- <script type="text/javascript" src="./js/bootstrap.min.js"></script> -->
+
+<!--/js-->
+
+<!-- animated-css -->
+<link href="./css/animate.css" rel="stylesheet" type="text/css" media="all">
+<script src="./js/wow.min.js"></script>
+<script>
+		 new WOW().init();
+		</script>
+<!-- /animated-css -->
+<style>
+a:link { text-decoration: none;}
+a:active { text-decoration:none}
+a:hover { text-decoration:none;} 
+a:visited { text-decoration: none; color: #7bc0e7}
+</style>
+<script>
+  $(document).ready(function() {
+    var id = $.cookie("id");
+
+    $("#createBtn").click(function(e) {
+      var from = $("#from").val();
+      var location = $("#location").val();
+      var time = $("#time").val();
+      var duration = $("#duration").val();
+      var peopleamount = $("#peopleamount").val();
+    
+    
+      var resource = Resource.createNew("U1384e58c235bee/TSS/TeamTravel/");
+      resource.setAttribute("From", from);
+      resource.setAttribute("To", location);
+      resource.setAttribute("Time", time);
+      resource.setAttribute("Duration", duration);
+      resource.setAttribute("TotalNumber", peopleamount);
+      resource.POST();
+      $.cookie("teamid",resource.getId());
+      var fatherresource = Resource.createNew("U1384e58c235bee/TSS/User/" + id);
+      fatherresource.GET();
+      var res = Resource.createNew("U1384e58c235bee/TSS/TeamTravel/" + resource.getId());
+      fatherresource.setSubresource(res);
+      fatherresource.setAttribute("TeamState","creater");
+      fatherresource.PUT();
+      $("#createTeamModal").modal('hide');
+      $("#createTeamBtn").hide();
+      $("#myTeamBtn").show();
+      alert("创建成功");
+
+    });
+
+    $("#myTeamBtn").click(function(e) {
+      updateMyTeamMember();
+
+      $("#myTeamModal").modal("show");
+    });
+
+    var resource = Resource.createNew("U1384e58c235bee/TSS/User/" + id);    
+    resource.GET();
+    var travels=resource.listSpecificSubresources("TeamTravel");
+    if(travels.length == 0){
+      $("#myTeamBtn").hide();
+    }else {
+      $("#createTeamBtn").hide();
+      $.cookie("teamid",travels[0].getId());
+      $("#joinTeamBtn").hide();
+      // document.getElementById("joinTeamBtn").href="#";
+    };
+    $("#time").kendoDateTimePicker({
+    format: "yyyy-MM-dd hh:mm tt"
+    });
+
+    $("#joinTeamBtn").click(function(e) {
+      var content = "";
+      content += "<table class=\"table table-striped\"><thead style=\"text-align:center\"><tr><th>出发地点</th><th>旅行地点</th><th>出发时间</th><th>旅行天数</th><th>操作</th></tr></thead><tbody >";
+              
+      var resourcecollection = ResourceCollection.createNew("U1384e58c235bee/TSS/TeamTravel");
+      resourcecollection.GET();
+      var result = resourcecollection.getResultSet();
+      for(var i=0;i<result.length;i++){
+        content += "<tr>";
+        content += "<td style=\"display:none;\">" + result[i].getId() + "</td>";
+        content += "<td>" + result[i].getAttribute("From") + "</td>";
+        content += "<td>" + result[i].getAttribute("To") + "</td>";
+        content += "<td>" + result[i].getAttribute("Time") + "</td>";
+        content += "<td>" + result[i].getAttribute("Duration") + "</td>";
+        content += "<td><button type=\"button\" class=\"btn btn-info\" onclick=\"apply(this)\">申请加入</button></td>";
+        content += "</tr>";
+      }
+      content += "</tbody></table>"
+      $("#joinTeamModalBody").html(content);
+      $("#joinTeamModal").modal("show");
+    });
+
+  });
+	
+  function updateMyTeamMember(){
+      var content = "";
+      content += "<table class=\"table table-striped\"><thead style=\"text-align:center\"><tr><th>用户</th><th>联系方式</th><th>当前状态</th><th>操作</th></tr></thead><tbody>";
+      var resourcecollection = ResourceCollection.createNew("U1384e58c235bee/TSS/User");
+      resourcecollection.addEqual("TeamTravel.id",$.cookie("teamid"));
+      resourcecollection.GET();
+      var result = resourcecollection.getResultSet();
+      for(var i=0;i<result.length;i++){
+        content += "<tr>";
+        content += "<td style=\"display:none;\">" + result[i].getId() + "</td>";
+        content += "<td width=\"20%\">" + result[i].getAttribute("UserName") + "</td>";
+        content += "<td width=\"30%\">" + result[i].getAttribute("Tel") + "</td>";
+        if(result[i].getAttribute("TeamState") == "applyer"){
+          content += "<td width=\"20%\">申请中</td>";
+          if(isCaptain()){
+            content += "<td width=\"15%\"><button type=\"button\" class=\"btn btn-info\" onclick=\"acceptApplication(this)\">同意</button></td>";
+            content += "<td width=\"15%\"><button type=\"button\" class=\"btn btn-info\" onclick=\"rejectApplication(this)\">拒绝</button></td>";
+          }
+        }else if(result[i].getAttribute("TeamState") == "creater"){
+          content += "<td width=\"20%\">队长</td>";
+        }else{
+          content += "<td width=\"20%\">成员</td>";
+        }
+        content += "</tr>";
+      }
+      content += "</tbody></table>"
+      $("#myTeamModalBody").html(content);
+  };
+
+  function isCaptain(){
+    var resource = Resource.createNew("U1384e58c235bee/TSS/User/" + $.cookie("id"));
+    resource.GET();
+    if(resource.getAttribute("TeamState") == "creater"){
+      return true;
+    }else {
+      return false;
+    }
+  }
+
+  function acceptApplication(e){
+    var tr = $(e).closest("tr").children('td').first();
+    $("#row").val(tr.text());
+    var resource = Resource.createNew("U1384e58c235bee/TSS/User/" + $("#row").val());
+    resource.GET();
+    resource.setAttribute("TeamState","member");
+    resource.PUT();
+    alert("已同意");
+    updateMyTeamMember();
+  };
+
+  function rejectApplication(e){
+    var tr = $(e).closest("tr").children('td').first();
+    $("#row").val(tr.text());
+    var resource = Resource.createNew("U1384e58c235bee/TSS/User/" + $("#row").val());
+    resource.GET();
+    resource.setAttribute("TeamState","");
+    resource.removeSingularSubresource("TeamTravel");
+    resource.PUT();
+    alert("已拒绝");
+    updateMyTeamMember();
+  };
+
+  function apply(e){
+    var tr = $(e).closest("tr").children('td').first();
+    $("#row").val(tr.text());
+    var fatherresource = Resource.createNew("U1384e58c235bee/TSS/User/" + $.cookie("id"));
+    fatherresource.GET();
+    var res = Resource.createNew("U1384e58c235bee/TSS/TeamTravel/" + $("#row").val());
+    fatherresource.setSubresource(res);
+    fatherresource.setAttribute("TeamState","applyer");
+    fatherresource.PUT();
+    $("#joinTeamModal").modal("hide");
+    alert("申请成功");
+    location.reload();
+  };
+
+  
+
+</script>
+</head>
+<body>
+<input id="row" type="hidden" value="text"/>
+<!-- create team Modal -->
+<div class="modal fade" id="createTeamModal" tabindex="-1" role="dialog" aria-labelledby="createTeamModalLabel" aria-hidden="true" >
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel" style="text-align:left">创建队伍</h4>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div style="margin-top:5px;">
+             出发地点：<input type="text" id="from" class="text" value="出发地点" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '请填写出发地点';}">
+             </div>
+             <div style="margin-top:5px;">
+             旅行地点：<input type="text" id="location" class="text" value="旅行地点" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '请填写旅行地点';}">
+             </div>
+             <div style="margin-top:5px;margin-left:46px;">
+             出发时间：<input type="text" id="time" class="text" value="出发时间" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '请填写出发时间';}">
+             </div>
+             <div style="margin-top:5px;">
+             旅行天数：<input type="text" id="duration" class="text" value="旅行天数" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '请填写旅行天数';}">
+             </div>
+             <div style="margin-top:5px;">
+             人数上限：<input type="text" id="peopleamount" class="text" value="人数上限" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '请填写人数上限';}">
+             </div>
+             <!-- <textarea rows="10" cols="70" onfocus="if(this.value == 'Your Message') this.value='';" onblur="if(this.value == '') this.value='Your Message';" >说点什么......</textarea> -->
+          </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+        <button type="button" id="createBtn" class="btn btn-primary">创建</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- create team Modal end -->
+
+<!-- my team Modal -->
+<div class="modal fade" id="myTeamModal" tabindex="-1" role="dialog" aria-labelledby="myTeamModalLabel" aria-hidden="true" >
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel" style="text-align:left">我的队伍</h4>
+      </div>
+      <div class="modal-body" id="myTeamModalBody">
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- my team Modal end -->
+
+<!-- join team Modal -->
+<div class="modal fade" id="joinTeamModal" tabindex="-1" role="dialog" aria-labelledby="joinTeamLabel" aria-hidden="true" >
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel" style="text-align:left">寻找伙伴</h4>
+      </div>
+      <div class="modal-body" id="joinTeamModalBody">
+
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+        
+      </div>
+    </div>
+  </div>
+</div>
+<!-- join team Modal end -->
+<!--Header-->  
+<div class="header">   	
+	<div class="container">	
+		<div class="logo">
+			<a href="#"><img src="./images/logo.png" class="img-responsive" alt=""/></a>
+			<div class="clearfix"> </div>
+		</div>
+			<div class="header-right">
+						 <div class="navigation">
+						 			<span class="menu"> </span>
+								<ul>
+									<li><a class="scroll" href="function.html" ><span>主页</span></a></li>
+									<!-- <li><a href="grouptrip.html" class="scroll" ><span>组队出行</span></a></li>
+									<li><a class="scroll" href="self-driving.html"><span>自驾游路线规划</span></a></li>
+									<li><a class="scroll" href="bustrip.html"><span>公交出行路线规划</span></a></li>
+									<li><a class="scroll" href="order.html"><span>餐饮酒店预订</span></a></li>
+									<li><a class="scroll" href="carrental.html"><span>租车服务</span></a></li>
+									<li><a class="scroll" href="recommendation.html"><span>旅游景点推荐</span></a></li> -->
+									
+								</ul>
+								
+						</div>
+						<!--script-nav -->	
+			
+					<!-- /script-nav -->
+					<!-- <div class="top-icons">
+					   <span class="icon1"> </span>
+					   <span class="icon2"> </span>
+					   <span class="icon3"> </span>
+				    </div>	 -->
+				<div class="clearfix"> </div>
+			</div>
+	</div>
+</div>			
+<!--/Header Ends Here-->
+
+<!--upcoming camps Start Here-->
+<div id="camps" class="upcoming">
+	<div class="container">	
+		<div class="top-p1">
+			<h3>大家一起出去玩</h3>
+			<p> 何为旅行？ 旅行不是一次出行， 也不只是一个假期。  旅行是一个过程，一次发现。 是一个自我发现的过程。  真正的旅行让我们直面自我。  旅行不仅让我们看到世界，更让我们看到自己在其中的位置。 究竟，是我们创造了旅行。  还是旅行造就了我们？ 生命本身就是一场旅行。生命将引领你去向何方？</p>
+		 </div>
+		 <div class="bootstrap-grids">			
+         <div class="col-md-4 camps" style="width:50%">
+				<img class="img-responsive" style="margin: 0 auto;" src="./images/01.jpg" alt=""/>
+					
+		<div class="clearfix"> </div>
+		<div class="Proin">
+			<p>在路上，遇见自己。 那个梦想中的自己，那个曾经丢失的自己，那个豁然开朗的自己。然后在世界的某个地方相聚，开怀。</p>
+			<a class="button wow swing" id="createTeamBtn" data-wow-delay= "0.4s" href="#createTeamModal" data-toggle="modal" >创建队伍</a>
+      <a class="button wow swing" id="myTeamBtn" data-wow-delay= "0.4s" href="#" visible="false">我的队伍</a>
+		</div>
+    </div>
+	<div class="col-md-4 camps" style="width:50%">
+					<img class="img-responsive" style="margin: 0 auto;" src="./images/02.jpg" alt="" />
+				
+				<div class="clearfix"> </div>
+			<div class="Proin">
+				<p>旅行最重要的，不是目的地，而是心境。脚在地狱，眼在天堂。旅行的意义在于找到自己，而非浏览他人。</p>
+					<a class="button wow swing" id="joinTeamBtn" data-wow-delay= "0.4s" href="#" >寻找伙伴</a>
+			</div>
+	</div>
+	
+		
+	</div>
+</div>	
+<!--/upcoming camps Ends Here-->
+
+
+
+
+
+
+
+</body>
+</html>

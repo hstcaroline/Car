@@ -1,0 +1,30 @@
+<html>
+<head>
+<script type="text/javascript" src="jquery-1.11.3.min.js"></script>
+</head>
+<body>
+<script type="text/javascript">
+$.ajax({
+url:"http://202.120.40.73:28080/Entity/U7e7f6d3aa4a91/Car/Car_part/",
+//data:{"id":"id"}, //以键/值对的形式
+async : false,
+dataType : "json",
+success : function(data) {
+var pro = data; // pro为programmers的一个数组
+datas = pro.Car_part;
+for(var i = 0; i<datas.length; i++) { //循环后台传过来的Json数组
+     var car = datas[i];
+	 
+	 var txt=car.id;
+     //alert(pro.id);
+     //alert(pro.car_part_name);
+    
+}
+$("p").text(txt);
+}
+
+});
+</script>
+<p>jjj</p>
+</body>
+</html>
