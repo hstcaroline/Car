@@ -4,9 +4,56 @@
 <head>
 <link rel="stylesheet" type="text/css" href="/Car/css/home.css">
 <link rel="stylesheet" type="text/css" href="/Car/css/detail.css">
+<script type="text/javascript" src="/Car/js/jquery-1.11.3.min.js"></script>
 <title>二手车</title>
 </head>
 <body>
+<script>
+$(document).ready(function(){
+	//	获得url中的参数即id的值
+	 var num = location.href.indexOf("=");
+	 var id = location.href.substr(num+1);
+	htmlobj=$.ajax({
+	url:"http://202.120.40.73:28080/Entity/U7e7f6d3aa4a91/Car/Car_info/"+id,
+	type:"GET",
+	async : false,
+	dataType : "json",
+	});
+	var datas = htmlobj.responseText;
+	var car = eval("("+datas+")");
+	$("#leftImg").html("<img src='/Car/img/"+car.id+"/1.jpg'"+" alt='"+car.car_type_id.type_name+"'>")
+	$("#car_title").html(car.car_type_id.type_name);
+	$("#oldPrice").html(car.car_price);
+	$("#newCarPrice").html(car.new_car_price);
+	$("#price_subtract").html(formatCurrencyNum(car.new_car_price-car.car_price));
+	$("#service_price").html(car.car_price*10000*0.01+"（车价x1%），送1年2万公里质保");
+	$("#license_date").html(car.car_license_date);
+	$("#car_metre").html(car.car_metre/10000+"万公里");
+	$("#car_license_adr").html(car.car_license_adr);
+	var txt="";
+	for(var i=1;i<=20;i++)
+	{
+		txt+="<img width='580' height='400' class='js-lazy-load'"
+			+" src='/Car/img/"+id+"/"+i+".jpg'"
+			+" style='visibility: visible; display: inline;'> ";
+	}
+	$("#imgs").html(txt);
+});
+//将数值四舍五入(保留1位小数)后格式化成金额形式  
+function formatCurrencyNum(num) {    
+    num = num.toString().replace(/\$|\,/g,'');    
+    if(isNaN(num))    
+    num = "0";    
+    sign = (num == (num = Math.abs(num)));    
+    num = Math.floor(num*10+0.50000000001);    
+    cents = num%10;    
+    num = Math.floor(num/10).toString();    
+    for (var i = 0; i < Math.floor((num.length-(1+i))/3); i++)    
+    num = num.substring(0,num.length-(4*i+3))+','+    
+    num.substring(num.length-(4*i+3));    
+    return (((sign)?'':'-') + num + '.' + cents);    
+}    
+</script>
 	<!-- 顶部导航条 -->
 	<jsp:include page="top.jsp" flush="false" />
 	<!-- header end-->
@@ -15,52 +62,43 @@
 			<!-- 基本信息 -->
 			<div class="laybox clearfix">
 				<!-- 左边图片 -->
-				<div class="det-sumleft"
-					data-widget="app/ms_v2/vehicle/c2c/widget/slideshow.js">
-					<div class="dt-sumpic" data-role="imgContainer">
-						<a href="javascript:void(0);" data-role="imgArrow"
-							class="arrow-prew prev"></a> <a href="javascript:void(0);"
-							data-role="imgArrow" class="arrow-next next"></a>
+				<div class="det-sumleft">
+					<div class="dt-sumpic">
 						<ul class="det-picside">
-							<li data-role="img" style="display: block"><img
-								src="/Car/img/car2.jpg" alt="丰田凯美瑞 2010款 凯美瑞 2.4 自动 240G 经典版">
+							<li id="leftImg" style="display: block">
+							<!-- 左边的图片显示 -->
 							</li>
 						</ul>
 					</div>
 				</div>
 				<!-- 左边图片结束 -->
-				<div class="det-sumright"
-					data-widget="app/ms_v2/vehicle/c2c/detail_page.js#appoint">
+				<div class="det-sumright">
 					<div class="dt-titbox">
-						<h1 class="dt-titletype">丰田凯美瑞 2010款 凯美瑞 2.4 自动 240G 经典版</h1>
+						<h1 class="dt-titletype" id="car_title">
+						<!-- 车类型描述 -->
+						</h1>
 						<div class="dt-titleinfo clearfix">
-							<ul class="title-info-r">
-
-								<!-- <li><span class="bg-span" data-widget="app/ms_v2/common/detail_page.js#storeFavorite" data-premier="" data-ref='{"puid":"1749850128","title":"\u4e30\u7530\u51ef\u7f8e\u745e 2010\u6b3e \u51ef\u7f8e\u745e 2.4 \u81ea\u52a8 240G \u7ecf\u5178\u7248","url":"http:\/\/sh.ganji.com\/ershouche\/1749850128x.htm"}'><a href="#" title=""><i class="ico-collect"></i>收藏</a></span></li>-->
-
-							</ul>
-
 							<span style="color:#999">车源号：</span><span style="color:#000">HC-1056118</span>
 						</div>
 					</div>
 					<div class="basic-box">
 						<div class="pricebox">
 							<i class="ico-txt ico-mt">车主报价</i> <span
-								class="fc-org pricestype"><b class="f30 numtype">¥9.80</b>万</span>
-							<span class="f14">新车价(含税)<font color="#f60">23.32万</font>,
-								省<font color="#f60">13.52万</font> </span>
+								class="fc-org pricestype"><b class="f30 numtype" id="oldPrice"></b>万</span>
+							<span class="f14">新车价(含税)<font color="#f60" id="newCarPrice"></font>万,
+								省<font color="#f60" id="price_subtract"></font>万 </span>
 						</div>
 						<!--服务费-->
 						<div class="car-fuwu">
-							<i class="ico-txt">服 务 费</i> <span>2940元（车价x3%），送1年2万公里质保</span>
+							<i class="ico-txt">服 务 费</i> <span id="service_price"></span>
 						</div>
 					</div>
 					<ul class="assort clearfix">
-						<li class="one"><b>2010-09</b>上牌时间</li>
-						<li><b>11万公里</b>里程</li>
-						<li><b>自动</b>变速箱</li>
+						<li class="one"><b id="license_date"></b>上牌时间</li>
+						<li><b id="car_metre"></b>里程</li>
+						<li><b id="">自动</b>变速箱</li>
 						<li title="各地车管所对排放标准认定有差异，结果仅供参考，外迁请详细咨询迁入地车管所。"><b>国四</b>排放标准</li>
-						<li><b>上海</b>上牌地</li>
+						<li><b id="car_license_adr"></b>上牌地</li>
 					</ul>
 					<p class="stipul-p">
 						<a href="#" class="stipul-btn">预约看车</a> <span class="f18">
@@ -81,7 +119,7 @@
 							</li>
 							<li><span class="indem03"></span>
 								<p class="f-type01">14天可退1年质保</p>
-								<p>瓜子全程保障，无担忧</p>
+								<p>全程保障，无担忧</p>
 							</li>
 						</ul>
 					</div>
@@ -91,92 +129,8 @@
 				<h3 class="yahei publicTit">
 					<i class="deck"></i>车辆图片
 				</h3>
-				<div class="dt-pictype"
-					data-widget="app/ms_v2/vehicle/c2c/list_page.js#lazyLoadV2">
-					<img width="580" height="400" class="js-lazy-load"
-						src="http://scs.ganjistatic1.com/gjfs18/M0A/E2/81/CgEHH1ZpRgveKeAEABvwRAvrSDc154_620-430c_8-1.jpg"
-						style="visibility: visible; display: inline;"> <img
-						width="580" height="400" class="js-lazy-load"
-						src="http://scs.ganjistatic1.com/gjfs15/M05/4A/B3/CgEHP1ZpRgug-EdFABszrPcROQg365_620-430c_8-1.jpg"
-						style="visibility: visible; display: inline;"> <img
-						width="580" height="400" class="js-lazy-load"
-						src="http://scs.ganjistatic1.com/gjfs16/M09/93/E5/CgEHQlZpRh-4P6vsAByVorDNj-g205_620-430c_8-1.jpg"
-						style="visibility: visible; display: inline;"> <img
-						width="580" height="400" class="js-lazy-load"
-						src="http://scs.ganjistatic1.com/gjfs18/M03/E3/1A/CgEHH1ZpRrCiKfivACCK8oLjqNw234_620-430c_8-1.jpg"
-						style="visibility: visible; display: inline;"> <img
-						width="580" height="400" class="js-lazy-load"
-						src="http://scs.ganjistatic1.com/gjfs15/M09/4A/FC/CgEHP1ZpR0a1wVbfABhZ7-eaOhk553_620-430c_8-1.jpg"
-						style="visibility: visible; display: inline;"> <img
-						width="580" height="400" class="js-lazy-load"
-						src="http://scs.ganjistatic1.com/gjfs18/M07/DE/4D/CgEHH1ZpQbznh1U4ABaz-916V0A445_620-430c_8-1.jpg"
-						style="visibility: visible; display: inline;"> <img
-						width="580" height="400" class="js-lazy-load"
-						src="http://scs.ganjistatic1.com/gjfs15/M01/4A/C0/CgEHQVZpRjHGK96EABc-HQkt85g129_620-430c_8-1.jpg"
-						style="visibility: visible; display: inline;"> <img
-						width="580" height="400" class="js-lazy-load"
-						src="http://scs.ganjistatic1.com/gjfs15/M06/49/A1/CgEHP1ZpQaDCSieLABMqj7ru8TE510_620-430c_8-1.jpg"
-						style="visibility: visible; display: inline;"> <img
-						width="580" height="400" class="js-lazy-load"
-						src="http://scs.ganjistatic1.com/gjfs16/M06/92/D4/CgEHXVZpQajTRNbdACrSl57IuBY443_620-430c_8-1.jpg"
-						style="visibility: visible; display: inline;"> <img
-						width="580" height="400" class="js-lazy-load"
-						src="http://scs.ganjistatic1.com/gjfs16/M09/93/E9/CgEHQlZpRjDLopnSABVznqo9SLU210_620-430c_8-1.jpg"
-						style="visibility: visible; display: inline;"> <img
-						width="580" height="400" class="js-lazy-load"
-						src="http://scs.ganjistatic1.com/gjfs18/M00/DE/4B/CgEHH1ZpQbnHqJScAA4j4t8uwRI109_620-430c_8-1.jpg"
-						style="visibility: visible; display: inline;"> <img
-						width="580" height="400" class="js-lazy-load"
-						src="http://scs.ganjistatic1.com/gjfs18/M00/DE/5C/CgEHH1ZpQczXPT6zABFUo4vq3dc045_620-430c_8-1.jpg"
-						style="visibility: visible; display: inline;"> <img
-						width="580" height="400" class="js-lazy-load"
-						src="http://scs.ganjistatic1.com/gjfs15/M05/4A/AF/CgEHP1ZpRfn3EdjeAB4c,vmxqwQ330_620-430c_8-1.jpg"
-						style="visibility: visible; display: inline;"> <img
-						width="580" height="400" class="js-lazy-load"
-						src="http://scs.ganjistatic1.com/gjfs15/M0B/4A/E1/CgEHQVZpRr7R-5TSABeuywTn4fw472_620-430c_8-1.jpg"
-						style="visibility: visible; display: inline;"> <img
-						width="580" height="400" class="js-lazy-load"
-						src="http://scs.ganjistatic1.com/gjfs18/M05/E3/50/CgEHH1ZpRufQwzUOABVP,u1nhhc652_620-430c_8-1.jpg"
-						style="visibility: visible; display: inline;"> <img
-						width="580" height="400" class="js-lazy-load"
-						src="http://scs.ganjistatic1.com/gjfs18/M01/DE/6D/CgEHH1ZpQd3mmpIUABDt,-t0CKE967_620-430c_8-1.jpg"
-						style="visibility: visible; display: inline;"> <img
-						width="580" height="400" class="js-lazy-load"
-						src="http://scs.ganjistatic1.com/gjfs18/M0B/42/E9/CgEHIFZpQdyus-mjABPkN,74z00486_620-430c_8-1.jpg"
-						style="visibility: visible; display: inline;"> <img
-						width="580" height="400" class="js-lazy-load"
-						src="http://scs.ganjistatic1.com/gjfs15/M03/49/B1/CgEHP1ZpQea48oxlAAz2O,Pk5E8092_620-430c_8-1.jpg"
-						style="visibility: visible; display: inline;"> <img
-						width="580" height="400" class="js-lazy-load"
-						src="http://scs.ganjistatic1.com/gjfs18/M05/DE/80/CgEHH1ZpQfOsu70CABMssoXg2Vc479_620-430c_8-1.jpg"
-						style="visibility: visible; display: inline;"> <img
-						width="580" height="400" class="js-lazy-load"
-						src="http://scs.ganjistatic1.com/gjfs18/M09/DE/81/CgEHH1ZpQfPy9eOPABO7iWD53m0732_620-430c_8-1.jpg"
-						style="visibility: visible; display: inline;"> <img
-						width="580" height="400" class="js-lazy-load"
-						src="http://scs.ganjistatic1.com/gjfs16/M07/92/E8/CgEHXVZpQf-yyFMtABBH1a0mwg4709_620-430c_8-1.jpg"
-						style="visibility: visible; display: inline;"> <img
-						width="580" height="400" class="js-lazy-load"
-						src="http://scs.ganjistatic1.com/gjfs16/M01/92/E3/CgEHQlZpQgOg3mBSAC0tczoq5CQ200_620-430c_8-1.jpg"
-						style="visibility: visible; display: inline;"> <img
-						width="580" height="400" class="js-lazy-load"
-						src="http://scs.ganjistatic1.com/gjfs15/M06/49/82/CgEHQFZpQZWhtiarABRy1dA79ow232_620-430c_8-1.jpg"
-						style="visibility: visible; display: inline;"> <img
-						width="580" height="400" class="js-lazy-load"
-						src="http://scs.ganjistatic1.com/gjfs16/M06/92/CF/CgEHXVZpQZSfP4u,ABOD-957z98783_620-430c_8-1.jpg"
-						style="visibility: visible; display: inline;"> <img
-						width="580" height="400" class="js-lazy-load"
-						src="http://scs.ganjistatic1.com/gjfs16/M05/93/FD/CgEHXFZpRffeDvMsABLgy-KRhKo937_620-430c_8-1.jpg"
-						style="visibility: visible; display: inline;"> <img
-						width="580" height="400" class="js-lazy-load"
-						src="http://scs.ganjistatic1.com/gjfs15/M0B/49/BF/CgEHQVZpQhHN4SmuABFptSTNbMU264_620-430c_8-1.jpg"
-						style="visibility: visible; display: inline;"> <img
-						width="580" height="400" class="js-lazy-load"
-						src="http://scs.ganjistatic1.com/gjfs18/M09/DE/A3/CgEHH1ZpQhvkkey6ABJGGtosKkU137_620-430c_8-1.jpg"
-						style="visibility: visible; display: inline;"> <img
-						width="580" height="400" class="js-lazy-load"
-						src="http://scs.ganjistatic1.com/gjfs15/M0B/49/BF/CgEHQVZpQhD30qRTABDTK4HDuac651_620-430c_8-1.jpg"
-						style="visibility: visible; display: inline;">
+				<div class="dt-pictype" id="imgs">
+				<!-- 显示车的详细图片，一共20张 -->
 				</div>
 			</div>
 			<div class="modbox" id="config">
