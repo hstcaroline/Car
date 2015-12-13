@@ -40,8 +40,11 @@ json try
     //回调函数  
     function zswFun(){  
         if(xmlHttpRequest.readyState == 4 && xmlHttpRequest.status == 200){  
-            var result = xmlHttpRequest.responseText;  
-			showResult(result);
+            var result = JSON(xmlHttpRequest.responseText); 
+			
+			var hh=result.Car_part;
+			alert(hh.length);
+			//showResult(result);
         }  		
     }
 	function showResult(obj)
