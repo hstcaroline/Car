@@ -9,7 +9,7 @@
 </head>
 <body>
 <script>
-$(document).ready(function(){
+$(document).ready(function(){	
 	var car_type = getUrlParam('car_type');
 	var url = "http://202.120.40.73:28080/Entity/U7e7f6d3aa4a91/Car/Car_type/"+car_type;
 	$.getJSON(url,function(data){
@@ -18,8 +18,8 @@ $(document).ready(function(){
 		
 	});
 	$("#dateAndnumber").html(getUrlParam('date')+"上牌，目前行驶"+getUrlParam('number')+"万公里");
-	evaluate();
-	
+	//var sell_price = evaluate();
+	//$("#sell_price").html();
 });
   //获取url中的参数
 function getUrlParam(name) {
@@ -31,13 +31,62 @@ function getUrlParam(name) {
 }
 function evaluate()
 {
-	/* var date = new Date(getUrlParam("date").replace(/-/g,"/"));  
+	//获得上牌时间和现在时间的年份差
+	var date = new Date(getUrlParam("date").replace(/-/g,"/"));  
 	var mydate = new Date();
-	mydate.getDate();
-	alert(mydate.getTime());
-	var m = (mydate.getTime()-date.getTime())/(1000*60*60);  
-	alert(m); */
-	//return str;
+	var year = mydate.getYear()-date.getYear();  
+	//获得行驶的里程数
+	var number = getUrlParam("number")
+	var weight_time = 15,weight_num = 15;
+	/* 通过“54321法”估计二手车的价格 */
+	if(number >= 6)
+	{
+		weight_num -= 5;
+		if(number >= 12)
+		{
+			weight_num -=4;
+			if(number >= 18)
+			{	
+				weight_num -=3;
+				if(number >=24)
+				{
+					weight_num -=2;
+					if(number >=30)
+					{
+						weight_num -=1;
+					}
+				}
+			}
+			
+		}
+	}
+	else
+		weight_num -=0.5;
+	if(year >= 2)
+	{
+		weight_time -= 5;
+		if(year >= 4)
+		{
+			weight_time -=4;
+			if(year >= 6)
+			{	
+				weight_time -=3;
+				if(year >=8)
+				{
+					weight_time -=2;
+					if(year >= 10)
+					{
+						weight_time -=1;
+					}
+				}
+			}
+			
+		}
+	}
+	else
+		weight_time -=0.5;
+	var weight = (weight_time*0.6+weight_num*0.4)/15;
+	return weight;
 }
 </script>
 	<!-- 顶部导航条 -->
@@ -52,7 +101,7 @@ function evaluate()
             <ul>
                 <li class="br">
                     <span>零售价</span>
-                    <b id="price">7.60万</b>
+                    <b id="sell_price">7.60万</b>
                 </li>
                 <li>
                     <span>收购价</span>
