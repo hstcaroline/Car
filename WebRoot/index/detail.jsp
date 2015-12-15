@@ -8,52 +8,100 @@
 <title>二手车</title>
 </head>
 <body>
-<script>
-$(document).ready(function(){
-	//	获得url中的参数即id的值
-	 var num = location.href.indexOf("=");
-	 var id = location.href.substr(num+1);
-	htmlobj=$.ajax({
-	url:"http://202.120.40.73:28080/Entity/U7e7f6d3aa4a91/Car/Car_info/"+id,
-	type:"GET",
-	async : false,
-	dataType : "json",
-	});
-	var datas = htmlobj.responseText;
-	var car = eval("("+datas+")");
-	$("#leftImg").html("<img src='/Car/img/"+car.id+"/1.jpg'"+" alt='"+car.car_type_id.type_name+"'>")
-	$("#car_title").html(car.car_type_id.type_name);
-	$("#oldPrice").html(car.car_price);
-	$("#newCarPrice").html(car.new_car_price);
-	$("#price_subtract").html(formatCurrencyNum(car.new_car_price-car.car_price));
-	$("#service_price").html(car.car_price*10000*0.01+"（车价x1%），送1年2万公里质保");
-	$("#license_date").html(car.car_license_date);
-	$("#car_metre").html(car.car_metre/10000+"万公里");
-	$("#car_license_adr").html(car.car_license_adr);
-	var txt="";
-	for(var i=1;i<=20;i++)
-	{
-		txt+="<img width='580' height='400' class='js-lazy-load'"
+	<script>
+		$(document)
+				.ready(
+						function() {
+							//	获得url中的参数即id的值
+							var num = location.href.indexOf("=");
+							var id = location.href.substr(num + 1);
+							htmlobj = $
+									.ajax({
+										url : "http://202.120.40.73:28080/Entity/U7e7f6d3aa4a91/Car/Car_info/"
+												+ id,
+										type : "GET",
+										async : false,
+										dataType : "json",
+									});
+							var datas = htmlobj.responseText;
+							var car = eval("(" + datas + ")");
+							$("#leftImg")
+									.html(
+											"<img src='/Car/img/"+car.id+"/1.jpg'"+" alt='"+car.car_type_id.type_name+"'>")
+							$("#car_title").html(car.car_type_id.type_name);
+							$("#oldPrice").html(car.car_price);
+							$("#newCarPrice").html(car.new_car_price);
+							$("#price_subtract").html(
+									formatCurrencyNum(car.new_car_price
+											- car.car_price));
+							$("#service_price").html(
+									car.car_price * 10000 * 0.01
+											+ "（车价x1%），送1年2万公里质保");
+							$("#license_date").html(car.car_license_date);
+							$("#car_metre").html(car.car_metre / 10000 + "万公里");
+							$("#car_license_adr").html(car.car_license_adr);
+							var txt = "";
+							for ( var i = 1; i <= 20; i++) {
+								txt += "<img width='580' height='400' class='js-lazy-load'"
 			+" src='/Car/img/"+id+"/"+i+".jpg'"
 			+" style='visibility: visible; display: inline;'> ";
-	}
-	$("#imgs").html(txt);
-});
-//将数值四舍五入(保留1位小数)后格式化成金额形式  
-function formatCurrencyNum(num) {    
-    num = num.toString().replace(/\$|\,/g,'');    
-    if(isNaN(num))    
-    num = "0";    
-    sign = (num == (num = Math.abs(num)));    
-    num = Math.floor(num*10+0.50000000001);    
-    cents = num%10;    
-    num = Math.floor(num/10).toString();    
-    for (var i = 0; i < Math.floor((num.length-(1+i))/3); i++)    
-    num = num.substring(0,num.length-(4*i+3))+','+    
-    num.substring(num.length-(4*i+3));    
-    return (((sign)?'':'-') + num + '.' + cents);    
-}    
-</script>
+							}
+							$("#imgs").html(txt);
+							$("#car_company").html(
+									car.car_type_id.car_part_id.car_part_name);
+							$("#engine_name")
+									.html(
+											car.car_type_id.car_part_id.engine_id.engine_name);
+							$("#gearbox_id")
+									.html(
+											car.car_type_id.car_part_id.gearbox_id.gearbox_name);
+							$("#output_volume")
+									.html(
+											car.car_type_id.car_part_id.engine_id.output_volume);
+							$("#max_horsepower")
+									.html(
+											car.car_type_id.car_part_id.engine_id.max_horsepower);
+							$("#max_torque")
+									.html(
+											car.car_type_id.car_part_id.engine_id.max_torque);
+							$("#fuel_type")
+									.html(
+											car.car_type_id.car_part_id.engine_id.fuel_type);
+							$("#fuel_tage")
+									.html(
+											car.car_type_id.car_part_id.engine_id.fuel_tage);
+							$("#output_type")
+									.html(
+											car.car_type_id.car_part_id.engine_id.output_type);
+							$("#driving_type")
+									.html(
+											car.car_type_id.car_part_id.chassis_id.driving_type);
+							$("#motion_type")
+									.html(
+											car.car_type_id.car_part_id.chassis_id.motion_type);
+							$("#order_button").click(function() {
+							alert("in");
+								$("#window").css('display', 'block');//隐藏，等同于show()方法
+							});
+						});
+		//将数值四舍五入(保留1位小数)后格式化成金额形式  
+		function formatCurrencyNum(num) {
+			num = num.toString().replace(/\$|\,/g, '');
+			if (isNaN(num))
+				num = "0";
+			sign = (num == (num = Math.abs(num)));
+			num = Math.floor(num * 10 + 0.50000000001);
+			cents = num % 10;
+			num = Math.floor(num / 10).toString();
+			for ( var i = 0; i < Math.floor((num.length - (1 + i)) / 3); i++)
+				num = num.substring(0, num.length - (4 * i + 3)) + ','
+						+ num.substring(num.length - (4 * i + 3));
+			return (((sign) ? '' : '-') + num + '.' + cents);
+		}
+		function openLogin() {
+			document.getElementById("win").style.display = "";
+		}
+	</script>
 	<!-- 顶部导航条 -->
 	<jsp:include page="top.jsp" flush="false" />
 	<!-- header end-->
@@ -66,7 +114,7 @@ function formatCurrencyNum(num) {
 					<div class="dt-sumpic">
 						<ul class="det-picside">
 							<li id="leftImg" style="display: block">
-							<!-- 左边的图片显示 -->
+								<!-- 左边的图片显示 -->
 							</li>
 						</ul>
 					</div>
@@ -75,7 +123,7 @@ function formatCurrencyNum(num) {
 				<div class="det-sumright">
 					<div class="dt-titbox">
 						<h1 class="dt-titletype" id="car_title">
-						<!-- 车类型描述 -->
+							<!-- 车类型描述 -->
 						</h1>
 						<div class="dt-titleinfo clearfix">
 							<span style="color:#999">车源号：</span><span style="color:#000">HC-1056118</span>
@@ -84,9 +132,10 @@ function formatCurrencyNum(num) {
 					<div class="basic-box">
 						<div class="pricebox">
 							<i class="ico-txt ico-mt">车主报价</i> <span
-								class="fc-org pricestype"><b class="f30 numtype" id="oldPrice"></b>万</span>
-							<span class="f14">新车价(含税)<font color="#f60" id="newCarPrice"></font>万,
-								省<font color="#f60" id="price_subtract"></font>万 </span>
+								class="fc-org pricestype"><b class="f30 numtype"
+								id="oldPrice"></b>万</span> <span class="f14">新车价(含税)<font
+								color="#f60" id="newCarPrice"></font>万, 省<font color="#f60"
+								id="price_subtract"></font>万 </span>
 						</div>
 						<!--服务费-->
 						<div class="car-fuwu">
@@ -101,9 +150,9 @@ function formatCurrencyNum(num) {
 						<li><b id="car_license_adr"></b>上牌地</li>
 					</ul>
 					<p class="stipul-p">
-						<a href="#" class="stipul-btn">预约看车</a> <span class="f18">
-							<i class="fc-org yahei">看车电话：</i> <b class="teltype">400-733-1199</b>
-						</span>
+						<a href="#" class="stipul-btn" id="order_button">预约看车</a> <span
+							class="f18"> <i class="fc-org yahei">看车电话：</i> <b
+							class="teltype">400-733-1199</b> </span>
 					</p>
 
 					<div class="combox indem-box">
@@ -130,7 +179,7 @@ function formatCurrencyNum(num) {
 					<i class="deck"></i>车辆图片
 				</h3>
 				<div class="dt-pictype" id="imgs">
-				<!-- 显示车的详细图片，一共20张 -->
+					<!-- 显示车的详细图片，一共20张 -->
 				</div>
 			</div>
 			<div class="modbox" id="config">
@@ -148,7 +197,7 @@ function formatCurrencyNum(num) {
 									</tr>
 									<tr>
 										<td width="50%" class="td1">厂商</td>
-										<td width="50%" class="td2">广汽丰田</td>
+										<td width="50%" class="td2" id="car_company"></td>
 									</tr>
 									<tr>
 										<td width="50%" class="td1">级别</td>
@@ -156,15 +205,15 @@ function formatCurrencyNum(num) {
 									</tr>
 									<tr>
 										<td width="50%" class="td1">发动机</td>
-										<td width="50%" class="td2">2.4L 167马力 L4</td>
+										<td width="50%" class="td2" id="engine_name"></td>
 									</tr>
 									<tr>
 										<td width="50%" class="td1">变速箱</td>
-										<td width="50%" class="td2">5档手自一体变速器</td>
+										<td width="50%" class="td2" id="gearbox_id"></td>
 									</tr>
 									<tr>
 										<td width="50%" class="td1">车身结构</td>
-										<td width="50%" class="td2">四门5座三厢车</td>
+										<td width="50%" class="td2">四门5座两厢车</td>
 									</tr>
 									<tr>
 										<td width="50%" class="td1">长*宽*高(mm)</td>
@@ -194,7 +243,7 @@ function formatCurrencyNum(num) {
 									</tr>
 									<tr>
 										<td width="50%" class="td1">排量(L)</td>
-										<td width="50%" class="td2">2.4</td>
+										<td width="50%" class="td2" id="output_volume">1.5</td>
 									</tr>
 									<tr>
 										<td width="50%" class="td1">进气形式</td>
@@ -206,19 +255,19 @@ function formatCurrencyNum(num) {
 									</tr>
 									<tr>
 										<td width="50%" class="td1">最大马力(Ps)</td>
-										<td width="50%" class="td2">167</td>
+										<td width="50%" class="td2" id="max_horsepower">184</td>
 									</tr>
 									<tr>
 										<td width="50%" class="td1">最大扭矩(N*m)</td>
-										<td width="50%" class="td2">224</td>
+										<td width="50%" class="td2" id="max_torque">220</td>
 									</tr>
 									<tr>
 										<td width="50%" class="td1">燃料类型</td>
-										<td width="50%" class="td2">汽油</td>
+										<td width="50%" class="td2" id="fuel_type">汽油</td>
 									</tr>
 									<tr>
 										<td width="50%" class="td1">燃油标号</td>
-										<td width="50%" class="td2">93#</td>
+										<td width="50%" class="td2" id="fuel_tage">97#</td>
 									</tr>
 									<tr>
 										<td width="50%" class="td1">供油方式</td>
@@ -226,7 +275,7 @@ function formatCurrencyNum(num) {
 									</tr>
 									<tr title="各地车管所对排放标准认定有差异，结果仅供参考，外迁请详细咨询迁入地车管所。">
 										<td width="50%" class="td1">排放标准</td>
-										<td width="50%" class="td2">国四</td>
+										<td width="50%" class="td2" id="output_type">国四</td>
 									</tr>
 								</tbody>
 							</table>
@@ -240,11 +289,11 @@ function formatCurrencyNum(num) {
 									</tr>
 									<tr>
 										<td width="50%" class="td1">驱动方式</td>
-										<td width="50%" class="td2">前轮驱动</td>
+										<td width="50%" class="td2" id="driving_type">前轮驱动</td>
 									</tr>
 									<tr>
 										<td width="50%" class="td1">助力类型</td>
-										<td width="50%" class="td2">机械液压助力</td>
+										<td width="50%" class="td2" id="motion_type">机械液压助力</td>
 									</tr>
 									<tr>
 										<td width="50%" class="td1">前悬挂类型</td>
@@ -420,5 +469,23 @@ function formatCurrencyNum(num) {
 			</div>
 		</div>
 	</div>
+	<!-- <div id=back
+		style="display:none; position:absolute; left:0; top:0; width:100%; height:100%; background-color:#000; filter:alpha(opacity=60)"></div>
+	<div id=win
+		style="display:none; position:absolute; left:50%; top:50%; width:600px; height:400px; margin-left:-300px; margin-top:-200px; border:1px solid #888; background-color:#edf; text-align:center">
+		这是DIV登录框示例<br> <a href="javascript:closeLogin();">关闭登录框</a>
+	</div> -->
+	<!-- <div class="cont-box" id="window" style="display:none" >
+		<p class="p-tit">填写手机，瓜子客服将在次日联系您看车。</p>
+		<ul class="fiebox">
+			<li><span>您的手机号码：</span> <input type="text" class="texttype"
+				name="phone">
+				<p class="type"></p></li>
+			<li style=""><button class="stipul-btn01" type="button">立即预约看车</button>
+			</li>
+		</ul>
+		<input name="puid" type="hidden" value="2026367951"> <input
+			name="city_id" type="hidden" value="13">
+	</div> -->
 </body>
 </html>

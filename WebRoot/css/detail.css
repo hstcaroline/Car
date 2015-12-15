@@ -266,3 +266,59 @@ tr {
     padding: 0 0 0 25px;
     width: 58%;
 }
+.cont-box {
+    margin: 30px;
+    color: #4b4b4b;
+    font-family: "Microsoft Yahei";
+    font-size: 16px;
+    position:absolute; 
+    width:450px;
+    height:260px;
+    background-color:#000;
+    top: 410.5px;
+    left: 407px;
+    margin-left: -225px; 
+    margin-top: -130px;
+   
+}
+.p-tit {
+    color: #999;
+}
+.fiebox {
+    margin: 30px 0;
+    line-height: 30px;
+}
+.fiebox li {
+    list-style: none;
+}
+.texttype {
+    width: 218px;
+    height: 38px;
+    line-height: 38px;
+    border: solid 1px #ddd;
+    line-height: 38px;
+    padding: 0 5px;
+    font-size: 16px;
+}
+.type {
+    color: #f60;
+    font-size: 12px;
+    margin: 0 0 0 117px;
+}
+.fiebox li {
+    list-style: none;
+}
+.stipul-btn01 {
+    width: 218px;
+    height: 46px;
+    line-height: 46px;
+    color: #fff;
+    font-family: "Microsoft Yahei";
+    background-color: #fd8000;
+    text-align: center;
+    display: inline-block;
+    font-size: 18px;
+    margin-right: 20px;
+    border: 0;
+    margin: 10px 0 0 117px;
+}

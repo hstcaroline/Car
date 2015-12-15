@@ -25,11 +25,11 @@ $(document).ready(function(){
 	{
 		txt += "<li onmouseover='mOver(this)' onmouseout='mOut(this)'>"
 				+"<div class='list-infoBox'>"
-				+"<a title="+cars[i].car_type_id.type_name+" target='_blank' class='imgtype' href='/Car/index/detail.jsp'>" 
+				+"<a title="+cars[i].car_type_id.type_name+" target='_blank' class='imgtype' href='/Car/index/detail.jsp?id="+cars[i].id+"'>" 
 				+"<span class='hover-bg'></span> <img width='290' height='192'"
 				+"src='/Car/img/"+cars[0].id+"/1.jpg'"+" alt="+cars[i].car_type_id.type_name+"> </a>"
 				+"<p class='infoBox'>"
-				+"<a title="+cars[i].car_type_id.type_name+" href='/sh/1868235952x.htm' target='_blank' class='info-title'>"+cars[i].car_type_id.type_name+"</a></p>"
+				+"<a title="+cars[i].car_type_id.type_name+" href='/Car/index/detail.jsp?id="+cars[i].id+"' target='_blank' class='info-title'>"+cars[i].car_type_id.type_name+"</a></p>"
 				+"<p class='fc-gray'><span>"+cars[i].car_license_date+"上牌</span> <em class='shuxian'>|</em>行驶"+cars[i].car_metre/10000+"万公里</p>"
 				+"<p class='priType-s'><span><i class='fc-org priType'>"+cars[i].car_price+"</i>万</span></p>"
 				+"</div></li>" ;
@@ -60,7 +60,7 @@ function mOut(obj) {
 						<div class="poa top-title">
 							<h1>更好的二手车，更好的购车体验</h1>
 							<div class="top-info">
-								259项严苛检测 , 无重大事故&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;瓜子陪同看车 ,
+								259项严苛检测 , 无重大事故&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TT陪同看车 ,
 								1年放心质保 <a target="_blank" href="/sh/intro/"
 									onmouseover="mOver(this)" onmouseout="mOut(this)">了解详情</a>
 							</div>

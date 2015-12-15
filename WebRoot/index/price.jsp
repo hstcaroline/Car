@@ -11,15 +11,19 @@
 <script>
 $(document).ready(function(){	
 	var car_type = getUrlParam('car_type');
+	var new_car_price = 0;
 	var url = "http://202.120.40.73:28080/Entity/U7e7f6d3aa4a91/Car/Car_type/"+car_type;
+	
 	$.getJSON(url,function(data){
 		var car_name = data.series_id.brand_id.brand_name+" "+data.series_id.series_name+" "+data.type_name;
 		$("#car_name").html(car_name);
-		
+		new_car_price = data.new_car_price;
+		var old_car_price = new_car_price*evaluate();
+		$("#sell_old_price").html(formatCurrencyNum(old_car_price)+"万");
+		$("#buy_old_price").html(formatCurrencyNum(old_car_price*0.9)+"万");
 	});
 	$("#dateAndnumber").html(getUrlParam('date')+"上牌，目前行驶"+getUrlParam('number')+"万公里");
-	//var sell_price = evaluate();
-	//$("#sell_price").html();
+	
 });
   //获取url中的参数
 function getUrlParam(name) {
@@ -29,6 +33,20 @@ function getUrlParam(name) {
   		return unescape(r[2]);
     return null; //返回参数值
 }
+//将数值四舍五入(保留1位小数)后格式化成金额形式  
+function formatCurrencyNum(num) {    
+    num = num.toString().replace(/\$|\,/g,'');    
+    if(isNaN(num))    
+    num = "0";    
+    sign = (num == (num = Math.abs(num)));    
+    num = Math.floor(num*10+0.50000000001);    
+    cents = num%10;    
+    num = Math.floor(num/10).toString();    
+    for (var i = 0; i < Math.floor((num.length-(1+i))/3); i++)    
+    num = num.substring(0,num.length-(4*i+3))+','+    
+    num.substring(num.length-(4*i+3));    
+    return (((sign)?'':'-') + num + '.' + cents);    
+}    
 function evaluate()
 {
 	//获得上牌时间和现在时间的年份差
@@ -101,11 +119,11 @@ function evaluate()
             <ul>
                 <li class="br">
                     <span>零售价</span>
-                    <b id="sell_price">7.60万</b>
+                    <b id="sell_old_price">7.60万</b>
                 </li>
                 <li>
                     <span>收购价</span>
-                    <em>6.92万</em>
+                    <em id="buy_old_price">6.92万</em>
                 </li>
             </ul>
             <h4>*此价格仅供参考</h4>
