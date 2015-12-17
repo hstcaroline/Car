@@ -30,10 +30,12 @@
 											"<img src='/Car/img/"+car.id+"/1.jpg'"+" alt='"+car.car_type_id.type_name+"'>")
 							$("#car_title").html(car.car_type_id.type_name);
 							$("#oldPrice").html(car.car_price);
-							$("#newCarPrice").html(car.new_car_price);
-							$("#price_subtract").html(
-									formatCurrencyNum(car.new_car_price
-											- car.car_price));
+							$("#newCarPrice").html(
+									car.car_type_id.new_car_price);
+							$("#price_subtract")
+									.html(
+											formatCurrencyNum(car.car_type_id.new_car_price
+													- car.car_price));
 							$("#service_price").html(
 									car.car_price * 10000 * 0.01
 											+ "（车价x1%），送1年2万公里质保");
@@ -80,10 +82,39 @@
 									.html(
 											car.car_type_id.car_part_id.chassis_id.motion_type);
 							$("#order_button").click(function() {
-							alert("in");
-								$("#window").css('display', 'block');//隐藏，等同于show()方法
+								$("#freeTel").css('display', 'block');//隐藏，等同于show()方法
+								$("#indem-box").css('display', 'none');
+							});
+							$("#telephone_button").click(function() {
+								//alert($("#telephone").val());
+								if($("#telephone").val()==""||$("#telephone").val()=="请输入手机号")
+								{
+									alert("请输入您的手机号码"); 
+								}
+								else if (!$("#telephone").val().match(/^(((13[0-9]{1})|159|153|(18[0-9]{1}))+\d{8})$/))
+								{ 
+									alert("手机号码格式不正确！"); 
+									$("#telephone").focus(); 
+									return;
+								}
+								//post
+								 alert("alidate Success");
 							});
 						});
+		$(document).bind('click', function(e) {
+			var e = e || window.event; //浏览器兼容性 
+			var elem = e.target || e.srcElement;
+			while (elem) { //循环判断至跟节点，防止点击的是div子元素 
+				if (elem.id && elem.id == "freeTel"||elem.id == "order_button") {
+				//alert("in");
+					return;
+				}
+				elem = elem.parentNode;
+			}
+			//alert("in");
+			$("#freeTel").css('display', 'none'); //点击的不是div或其子元素 
+			$("#indem-box").css('display', 'block');
+		});
 		//将数值四舍五入(保留1位小数)后格式化成金额形式  
 		function formatCurrencyNum(num) {
 			num = num.toString().replace(/\$|\,/g, '');
@@ -101,6 +132,24 @@
 		function openLogin() {
 			document.getElementById("win").style.display = "";
 		}
+		function mOver(obj) {
+			obj.style.backgroundColor = "#07903e";
+		}
+		function mOut(obj) {
+			obj.style.backgroundColor = "#22ac38";
+		}
+		function txtFocus(el) {
+			if (el.defaultValue == el.value) {
+				el.value = '';
+				el.style.color = '#000';
+			}
+		}
+		function txtBlur(el) {
+			if (el.value == '') {
+				el.value = el.defaultValue;
+				el.style.color = 'rgb(191, 191, 191)';
+			}
+		}
 	</script>
 	<!-- 顶部导航条 -->
 	<jsp:include page="top.jsp" flush="false" />
@@ -114,8 +163,7 @@
 					<div class="dt-sumpic">
 						<ul class="det-picside">
 							<li id="leftImg" style="display: block">
-								<!-- 左边的图片显示 -->
-							</li>
+								<!-- 左边的图片显示 --></li>
 						</ul>
 					</div>
 				</div>
@@ -150,26 +198,33 @@
 						<li><b id="car_license_adr"></b>上牌地</li>
 					</ul>
 					<p class="stipul-p">
-						<a href="#" class="stipul-btn" id="order_button">预约看车</a> <span
-							class="f18"> <i class="fc-org yahei">看车电话：</i> <b
+						<a href="javascript:void(0)" class="stipul-btn" id="order_button">预约看车</a>
+						<span class="f18"> <i class="fc-org yahei">看车电话：</i> <b
 							class="teltype">400-733-1199</b> </span>
 					</p>
-
-					<div class="combox indem-box">
+					<div class="free_con_div" id="freeTel" style="display:none">
+						<b class="d-icon"></b>
+						<div class="tcon">
+							<p>请输入您的手机号，便可与商家免费通话。您将收到010-10106088的来电，请注意接听。</p>
+							<input type="text" class="ipt-box" onfocus="txtFocus(this)"
+								onblur="txtBlur(this)" value="请输入手机号" id="telephone"
+								style="color: rgb(191, 191, 191);"> <a
+								id="telephone_button" href="javascript:void(0)" class="pop-tel">确定</a>
+							<em>服务时间：8:00-22:00</em>
+						</div>
+					</div>
+					<div class="combox indem-box" id="indem-box">
 						<h3 class="indem-tt f14">TT二手车直卖网已对该车辆进行检测，并将提供售后服务及保障。</h3>
 						<ul class="indem-ul">
 							<li><span class="indem01"></span>
 								<p class="f-type01">100%个人二手车</p>
-								<p>没有中间环节，无差价</p>
-							</li>
+								<p>没有中间环节，无差价</p></li>
 							<li><span class="indem02"></span>
 								<p class="f-type01">259项全面检测</p>
-								<p>严苛检测标准，无事故</p>
-							</li>
+								<p>严苛检测标准，无事故</p></li>
 							<li><span class="indem03"></span>
 								<p class="f-type01">14天可退1年质保</p>
-								<p>全程保障，无担忧</p>
-							</li>
+								<p>全程保障，无担忧</p></li>
 						</ul>
 					</div>
 				</div>
@@ -469,23 +524,5 @@
 			</div>
 		</div>
 	</div>
-	<!-- <div id=back
-		style="display:none; position:absolute; left:0; top:0; width:100%; height:100%; background-color:#000; filter:alpha(opacity=60)"></div>
-	<div id=win
-		style="display:none; position:absolute; left:50%; top:50%; width:600px; height:400px; margin-left:-300px; margin-top:-200px; border:1px solid #888; background-color:#edf; text-align:center">
-		这是DIV登录框示例<br> <a href="javascript:closeLogin();">关闭登录框</a>
-	</div> -->
-	<!-- <div class="cont-box" id="window" style="display:none" >
-		<p class="p-tit">填写手机，瓜子客服将在次日联系您看车。</p>
-		<ul class="fiebox">
-			<li><span>您的手机号码：</span> <input type="text" class="texttype"
-				name="phone">
-				<p class="type"></p></li>
-			<li style=""><button class="stipul-btn01" type="button">立即预约看车</button>
-			</li>
-		</ul>
-		<input name="puid" type="hidden" value="2026367951"> <input
-			name="city_id" type="hidden" value="13">
-	</div> -->
 </body>
 </html>
