@@ -9,11 +9,11 @@
 	<div class="top">
 		<div class="w">
 			<div class="logo">
-				<span class="totel"><span>买车卖车电话：</span><em>400-733-1199</em>
+				<span class="totel"><span>买车卖车电话：</span><em>400-100-1100</em>
 				</span> <a href="#" class="toindex" title="TT二手车直卖网"></a>
 				<div class="around-city">
-					<span>周边城市：</span> <a href='/hz/'>杭州</a><a href='/su/'>苏州</a><a
-						href='/wx/'>无锡</a>
+					<span>周边城市：</span> <a href='javascript:void(0);'>杭州</a><a href='javascript:void(0);'>苏州</a><a
+						href='javascript:void(0);'>无锡</a>
 				</div>
 			</div>
 		</div>

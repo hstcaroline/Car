@@ -87,10 +87,19 @@
 							});
 							$("#telephone_button").click(function() {
 								//alert($("#telephone").val());
-								if($("#telephone").val()==""||$("#telephone").val()=="请输入手机号")
+								if($("#realName").val()==""||$("#realName").val()=="请输入您的真实姓名")
+								{
+									alert("请输入您的姓名");
+									$("#realName").focus(); 
+									return ;
+								}
+								else if($("#telephone").val()==""||$("#telephone").val()=="请输入手机号")
 								{
 									alert("请输入您的手机号码"); 
+									$("#telephone").focus(); 
+									return;
 								}
+								
 								else if (!$("#telephone").val().match(/^(((13[0-9]{1})|159|153|(18[0-9]{1}))+\d{8})$/))
 								{ 
 									alert("手机号码格式不正确！"); 
@@ -98,7 +107,22 @@
 									return;
 								}
 								//post
-								 alert("alidate Success");
+								var user = {
+									telephone : $("#telephone").val(),
+								 	type : "0",
+								 	name : $("#realName").val()
+								}
+								$.ajax({
+									url: "http://202.120.40.73:28080/Entity/U7e7f6d3aa4a91/Car/User_info/",
+									contentType: "application/json",
+									type: "POST",
+									data: JSON.stringify(user),
+									success: function (data) {
+										if(data!=null)
+											alert("预约成功，您将在近日收到010-10101010的来电，请注意接听");
+										 location.reload();
+									}
+								})
 							});
 						});
 		$(document).bind('click', function(e) {
@@ -205,7 +229,10 @@
 					<div class="free_con_div" id="freeTel" style="display:none">
 						<b class="d-icon"></b>
 						<div class="tcon">
-							<p>请输入您的手机号，便可与商家免费通话。您将收到010-10106088的来电，请注意接听。</p>
+							<p>请输入您的姓名和手机号，便可与商家免费通话。您将收到010-10101010的来电，请注意接听。</p>
+							<input type="text" class="ipt-box" onfocus="txtFocus(this)"
+								onblur="txtBlur(this)" value="请输入您的真实姓名" id="realName"
+								style="color: rgb(191, 191, 191);">
 							<input type="text" class="ipt-box" onfocus="txtFocus(this)"
 								onblur="txtBlur(this)" value="请输入手机号" id="telephone"
 								style="color: rgb(191, 191, 191);"> <a
