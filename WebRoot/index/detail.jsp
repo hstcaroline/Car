@@ -25,8 +25,7 @@
 									});
 							var datas = htmlobj.responseText;
 							var car = eval("(" + datas + ")");
-							$("#leftImg")
-									.html(
+							$("#leftImg").html(
 											"<img src='/Car/img/"+car.id+"/1.jpg'"+" alt='"+car.car_type_id.type_name+"'>")
 							$("#car_title").html(car.car_type_id.type_name);
 							$("#oldPrice").html(car.car_price);
