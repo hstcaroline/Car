@@ -30,7 +30,7 @@ function fsubmit(obj){
 	}
 	if($('#userName').val()=="hst"&&$("#passWord").val()=="123")
 	{
-		location.href = "/Car/manager/top.jsp";
+		location.href = "/Car/manager/uploadCar.jsp";
 		return ;
 	}
 	alert("用户名或密码错误");

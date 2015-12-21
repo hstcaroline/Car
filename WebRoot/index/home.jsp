@@ -20,8 +20,9 @@ $(document).ready(function(){
 	var jsonObject=eval("("+datas+")");
 	var cars = jsonObject.Car_info;
 	var txt="";
-	var length = cars.length > 12 ? 12:cars.length;
-	for(var i=0;i<length;i++)
+	//var length = cars.length > 12 ? 12:cars.length;
+	var length = cars.length;
+	for(var i=0;i<length&&cars[i].isonline!=0;i++)
 	{
 		txt += "<li onmouseover='mOver(this)' onmouseout='mOut(this)'>"
 				+"<div class='list-infoBox'>"

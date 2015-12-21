@@ -36,11 +36,24 @@
 													+ " "
 													+ car_info.car_type_id.type_name);
 							$("#address").val(car_info.car_license_adr);
-							$("#addFile_btn").click(function(){
-								alert($("#addFile_btn").val());
-							});
+							var txt="";
+							$("#addFile_btn").change(function(){
+								
+								var path = $("#addFile_btn").val();
+								var paths = path.split("\\");
+								var text;
+								for(var i=0;i<paths.length;i++)
+								{
+									text+=paths[i]+"\\";
+								}
+								alert(text);
+								/* $("#txt1").val(name);
+								txt += "<li id='fileBox_WU_FILE_0' class='diyUploadHover'><div class='viewThumb' id='showPic'>"
+									+"<img src='"+$("#addFile_btn").val()+"'></div><div class='diyCancel'></div></li>" */
+							}); 
+								
+							$("#pics").html(txt);
 							
-
 						});
 	</script>
 	<!-- 顶部导航条 -->
@@ -87,7 +100,8 @@
 								<div class="box">
 									<a class="btn_addPic" href="javascript:void(0);"><span><EM>+</EM>添加图片</span>
 										<input type="file" class="filePrew" title="支持jpg、jpeg、gif、png格式"
-										id= "addFile_btn" tabIndex="3" size=3 name="pic">
+										id= "addFile_btn" tabIndex="3" size=3 name="fileTrans">
+										 <input type="hidden" name="file" />
 									</a>
 									<!-- <div id="test" class="webuploader-container">
 										<div class="webuploader-pick">
@@ -103,17 +117,13 @@
 										</div>
 									</div> -->
 									<div class="parentFileBox" style="width: 180px;">
-										<ul class="fileBoxUl">
-											<li id="fileBox_WU_FILE_0" class="diyUploadHover">
-												<div class="viewThumb">
-													<img src="">
-												</div>
-												<div class="diyCancel"></div></li>
+										<ul class="fileBoxUl" id="pics">
+										
 										</ul>
-										<div class="diyButton">
+										<!-- <div class="diyButton">
 											<a class="diyStart" href="javascript:void(0)">开始上传</a> <a
 												class="diyCancelAll" href="javascript:void(0)">全部取消</a>
-										</div>
+										</div> -->
 									</div>
 								</div>
 							</td>

@@ -25,7 +25,7 @@ $(document).ready(function(){
 	{
 		txt += "<li onmouseover='mOver(this)' onmouseout='mOut(this)'>"
 				+"<div class='list-infoBox'>"
-				+"<a title="+cars[i].car_type_id.type_name+" target='_blank' class='imgtype' href='/Car/index/detail.jsp?id="+cars[i].id+"'>" 
+				+"<a title="+cars[i].car_type_id.type_name+" target='_blank' class='imgtype' href='/Car/manager/upload.jsp?id="+cars[i].id+"'>" 
 				+"<span class='hover-bg'></span> <img width='290' height='192'"
 				+"src='/Car/img/"+cars[0].id+"/1.jpg'"+" alt="+cars[i].car_type_id.type_name+"> </a>"
 				+"<p class='infoBox'>"
@@ -53,31 +53,8 @@ function mOut(obj) {
 				<span class=" f14 fr"> 
 				<!-- <a href="/sh/buy/">查看全部</a><em
 					class="more">&gt;&gt;</em> --> 
-					<div class="search">
-								<form id="searchForm" name="searchForm" action="ShowPersonalInfo_searchByName" method="post">
-									<input
-										onblur="if (this.value=='') this.value=this.defaultValue"
-										onkeydown="javascript:if(event.keyCode==13) OrderSearch('ip_keyword');"
-										onfocus="if (this.value==this.defaultValue)this.value=''"
-										id="ip_keyword" type="text" class="itxt" value="车主姓名"
-										name="searchName" style="color: rgb(204, 204, 204);">
-									<a href="javascript:fsubmit(document.searchForm);"
-										class="button button-tiny" onclick="check1();"><s></s>查询</a>
-								</form>
-							</div>
+				
 					</span> <span class="ti-left"> <strong>所有新注册的车辆：</strong>
-					<!-- <a href="/sh/buy" class="" data-role="tabSelect" data-cate="0">猜您喜欢</a>
-					<span class="ddd">|</span> <a href="/sh/buy/" data-role="tabSelect"
-					data-cate="1" class="">最新上架</a> <span class="ddd">|</span> <a
-					href="/sh/buy/r_3/" data-role="tabSelect" data-cate="2" class="">降价急售</a>
-					<span class="ddd">|</span> <a href="/sh/buy/l1g1r_4/"
-					data-role="tabSelect" data-cate="3" class="">准新车</a> <span
-					class="ddd">|</span> <a href="/sh/buy/p3/" data-role="tabSelect"
-					class="on">练手车</a> <span class="ddd">|</span> <a href="/sh/buy/h2/"
-					data-role="tabSelect" data-cate="5" class="">SUV</a> <span
-					class="ddd">|</span> <a href="/sh/buy/r_2/" data-role="tabSelect"
-					data-cate="6" class="">女车主</a> </span> -->
-					
 			</div>
 
 			<div data-role="showList">
