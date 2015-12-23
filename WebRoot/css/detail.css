@@ -392,3 +392,30 @@ p {
     -webkit-margin-start: 0px;
     -webkit-margin-end: 0px;
 }
+.o-mt {
+    border-bottom: #1a98fe 2px solid;
+    border-left: #e6e6e6 1px solid;
+    line-height: 33px;
+    margin-bottom: 10px;
+    height: 33px;
+    border-top: #e6e6e6 1px solid;
+    border-right: #e6e6e6 1px solid;
+}
+#buy-area .mc {
+    border-bottom: medium none;
+    border-left: medium none;
+    margin-bottom: 3px;
+    border-top: medium none;
+    border-right: medium none;
+}
+.tb-void TABLE {
+    border-bottom: #e6e6e6 1px solid;
+    border-left: #e6e6e6 1px solid;
+    border-collapse: collapse;
+    border-top: #e6e6e6 0px solid;
+    /* border-right: #e6e6e6 1px solid; */
+}
+#buy-area TABLE TH {
+    border-bottom: #e6e6e6 1px solid;
+    text-align: center;
+}

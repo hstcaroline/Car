@@ -21,8 +21,8 @@
 			<div class="w">
 				<a href="/Car/index/home.jsp" onmouseover="mOver(this)" onmouseout="mOut(this)" class="active">首页</a> 
 				<a href="/Car/manager/uploadCar.jsp" onmouseover="mOver(this)" onmouseout="mOut(this)">车辆上架</a>
-			<!-- 	<a href="/Car/index/sell.jsp" onmouseover="mOver(this)" onmouseout="mOut(this)">车辆</a>
-				<a href="/Car/index/evaluate.jsp" onmouseover="mOver(this)" onmouseout="mOut(this)">汽车估价</a> -->
+			 	<a href="/Car/manager/order_show.jsp" onmouseover="mOver(this)" onmouseout="mOut(this)">查看订单</a>
+				<!--<a href="/Car/index/evaluate.jsp" onmouseover="mOver(this)" onmouseout="mOut(this)">汽车估价</a> -->
 			</div>
 		</div>
 	</div>

@@ -350,14 +350,15 @@ input.getNum {
 
 a.car-query {
 	display: block;
-	width: 220px;
-	margin: 0 auto;
-	height: 34px;
-	border-radius: 4px;
-	text-align: center;
-	background: #22ac38;
-	color: #fff;
-	font: normal 16px/34px "Microsoft Yahei";
+    width: 220px;
+    margin: 0 500px;
+    height: 34px;
+    border-radius: 4px;
+    text-align: center;
+    background: #22ac38;
+    color: #fff;
+    font: normal 16px/34px "Microsoft Yahei";
+    margin-bottom: 100px;
 }
 
 .assess-wrap .ass-tip {
@@ -418,8 +419,8 @@ a.car-query {
 	float: left;
 	border: 1px solid #09F;
 	border-radius: 5px;
-	width: 170px;
-	height: 150px;
+	width: 580px;
+	height:400px;
 	margin-top: 5px;
 	margin-left: 5px;
 	overflow: hidden;
@@ -433,8 +434,8 @@ a.car-query {
 	position: absolute;
 	top: 0;
 	left: 0;
-	width: 170px;
-	height: 150px;
+	width: 580px;
+	height: 400px;
 	overflow: hidden;
 }
 
@@ -453,14 +454,14 @@ a.car-query {
     width: 240px;
     height: 39px;
     overflow: hidden;
-    border: 1px solid #33D83E;
-    background: none repeat scroll 0 0 #74EA56;
+    border: 1px solid #bfbfbf;
+    background: none repeat scroll 0 0 #B4BEC5;
     color: #ffffff;
     cursor: pointer;
     text-align: center;
-    margin-left: 400px;
+    margin-left: 500px;
     margin-top: 10px;
-    font-size: 25px;
+    font-size: 20px;
 }
 
 .btn_addPic span {
@@ -494,3 +495,54 @@ a.car-query {
 	opacity: 0; /* 实现的关键点 */
 	filter: alpha(opacity = 0); /* 兼容IE */
 }
+.modbox {
+    margin: 34px 0 0 0;
+    border: 1px solid #e4e4e4;
+}
+.dt-pictype {
+    margin: 14px -10px 20px 0;
+}
+.dt-pictype img {
+    max-width: 570px;
+    max-height: 400px;
+    margin: 0 10px 10px 10px;
+    vertical-align: top;
+}
+.w {
+    width: 1190px;
+    margin: 0 auto;
+}
+.search{
+	padding-top: 30px;
+    padding-left: 10px;
+}
+.button{
+	font-weight: 300;
+    font-size: 16px;
+    font-family: "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    text-decoration: none;
+    text-align: center;
+    line-height: 40px;
+    height: 40px;
+    padding: 0 40px;
+    margin: 0;
+    display: inline-block;
+    cursor: pointer;
+    border: none;
+    background-color: #B4BEC5;
+    color:#fff;
+}
+/* .button-caution:visited, .button-caution-flat:visited {
+    color: #FFF;
+}
+.button-primary:visited, .button-primary-flat:visited {
+    color: #FFF;
+}
+.button:visited {
+    color: #666;
+}
+.button-caution, .button-caution-flat {
+    background-color: #FF4351;
+    border-color: #FF4351;
+    color: #FFF;
+} */

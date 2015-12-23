@@ -1,0 +1,37 @@
+.demo .box .view {
+    display: block;
+    padding-top: 30px;
+}
+.table {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+table {
+    max-width: 100%;
+    background-color: transparent;
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+table[Attributes Style] {
+    -webkit-user-modify: read-write;
+    word-wrap: break-word;
+    -webkit-line-break: after-white-space;
+}
+thead {
+    display: table-header-group;
+    vertical-align: middle;
+    border-color: inherit;
+}
+tr {
+    display: table-row;
+    vertical-align: inherit;
+    border-color: inherit;
+}
+.table th, .table td {
+    padding: 8px;
+    line-height: 20px;
+    text-align: left;
+    vertical-align: top;
+    border-top: 1px solid #dddddd;
+}

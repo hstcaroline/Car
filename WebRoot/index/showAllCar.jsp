@@ -26,10 +26,10 @@ $(document).ready(function(){
 				+"<div class='list-infoBox'>"
 				+"<a title="+cars[i].car_type_id.type_name+" target='_blank' class='imgtype' href='/Car/index/detail.jsp?id="+cars[i].id+"'>" 
 				+"<span class='hover-bg'></span> <img width='290' height='192'"
-				+"src='/Car/img/"+cars[0].id+"/1.jpg'"+" alt="+cars[i].car_type_id.type_name+"> </a>"
+				+"src='/Car/img/"+cars[i].id+"/1.jpg'"+" alt="+cars[i].car_type_id.type_name+"> </a>"
 				+"<p class='infoBox'>"
 				+"<a title="+cars[i].car_type_id.type_name+" href='/Car/index/detail.jsp?id="+cars[i].id+"' target='_blank' class='info-title'>"+cars[i].car_type_id.type_name+"</a></p>"
-				+"<p class='fc-gray'><span>"+cars[i].car_license_date+"上牌</span> <em class='shuxian'>|</em>行驶"+cars[i].car_metre/10000+"万公里</p>"
+				+"<p class='fc-gray'><span>"+cars[i].car_license_date+"上牌</span> <em class='shuxian'>|</em>行驶"+cars[i].car_metre+"万公里</p>"
 				+"<p class='priType-s'><span><i class='fc-org priType'>"+cars[i].car_price+"</i>万</span></p>"
 				+"</div></li>" ;
 	}

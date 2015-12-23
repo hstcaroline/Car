@@ -39,13 +39,13 @@
 									car.car_price * 10000 * 0.01
 											+ "（车价x1%），送1年2万公里质保");
 							$("#license_date").html(car.car_license_date);
-							$("#car_metre").html(car.car_metre / 10000 + "万公里");
+							$("#car_metre").html(car.car_metre + "万公里");
 							$("#car_license_adr").html(car.car_license_adr);
 							var txt = "";
 							for ( var i = 1; i <= 20; i++) {
 								txt += "<img width='580' height='400' class='js-lazy-load'"
-			+" src='/Car/img/"+id+"/"+i+".jpg'"
-			+" style='visibility: visible; display: inline;'> ";
+									+" src='/Car/img/"+id+"/"+i+".jpg'"
+									+" style='visibility: visible; display: inline;'> ";
 							}
 							$("#imgs").html(txt);
 							$("#car_company").html(
@@ -85,6 +85,7 @@
 								$("#indem-box").css('display', 'none');
 							});
 							$("#telephone_button").click(function() {
+								getTime();
 								//alert($("#telephone").val());
 								if($("#realName").val()==""||$("#realName").val()=="请输入您的真实姓名")
 								{
@@ -111,6 +112,7 @@
 								 	type : "0",
 								 	name : $("#realName").val()
 								}
+								
 								$.ajax({
 									url: "http://202.120.40.73:28080/Entity/U7e7f6d3aa4a91/Car/User_info/",
 									contentType: "application/json",
@@ -118,8 +120,30 @@
 									data: JSON.stringify(user),
 									success: function (data) {
 										if(data!=null)
-											alert("预约成功，您将在近日收到010-10101010的来电，请注意接听");
-										 location.reload();
+										{
+										//	alert("预约成功，您将在近日收到010-10101010的来电，请注意接听"+userId);
+											var userId = data.id;
+											var order = {
+												order_time : getTime().toString(),
+												is_done : 1,
+												buyer_id: {id : userId},
+												car_info_id: {id : id}
+											} 
+											$.ajax({
+												url: "http://202.120.40.73:28080/Entity/U7e7f6d3aa4a91/Car/Order_infor/",
+												contentType: "application/json",
+												type: "POST",
+												data: JSON.stringify(order),
+												success: function (data) {
+													if(data!=null)
+													{
+														alert("预约成功，您将在近日收到010-10101010的来电，请注意接听"+userId);
+													}
+													 location.reload();
+												} 
+											})
+										}
+										 //location.reload();
 									}
 								})
 							});
@@ -172,6 +196,17 @@
 				el.value = el.defaultValue;
 				el.style.color = 'rgb(191, 191, 191)';
 			}
+		}
+		function getTime()
+		{
+			var d = new Date();
+			var vYear = d.getFullYear()
+			var vMon = d.getMonth() + 1
+			var vDay = d.getDate()
+			var h = d.getHours(); 
+			var m = d.getMinutes(); 
+			s=vYear+"-"+(vMon<10 ? "0" + vMon : vMon)+"-"+(vDay<10 ? "0"+ vDay : vDay)+" "+(h<10 ? "0"+ h : h)+":"+(m<10 ? "0" + m : m);
+			return s;
 		}
 	</script>
 	<!-- 顶部导航条 -->
