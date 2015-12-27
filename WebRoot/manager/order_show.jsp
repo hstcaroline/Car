@@ -20,7 +20,6 @@ function havedone(id)
 		});
 		var datas = htmlobj.responseText;
 		var order=eval("("+datas+")");
-		alert(order.buyer_id.name);
 		var orderinfo = {
 			order_time : order.order_time,
 			is_done : 0,

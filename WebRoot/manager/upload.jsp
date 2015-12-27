@@ -127,7 +127,7 @@
 										success: function (data) {
 											if(data!=null)
 												alert("车辆上线成功");
-											 location.reload();
+											 location.href="/Car/manager/uploadCar.jsp";
 										}
 									})   
 								}

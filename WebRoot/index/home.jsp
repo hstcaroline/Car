@@ -11,7 +11,7 @@
 <script>
 $(document).ready(function(){
 	htmlobj=$.ajax({
-	url:"http://202.120.40.73:28080/Entity/U7e7f6d3aa4a91/Car/Car_info/",
+	url:"http://202.120.40.73:28080/Entity/U7e7f6d3aa4a91/Car/Car_info/?Car_info.isonline=1",
 	type:"GET",
 	async : false,
 	dataType : "json",
@@ -26,11 +26,11 @@ $(document).ready(function(){
 	{
 		txt += "<li onmouseover='mOver(this)' onmouseout='mOut(this)'>"
 				+"<div class='list-infoBox'>"
-				+"<a title="+cars[i].car_type_id.type_name+" target='_blank' class='imgtype' href='/Car/index/detail.jsp?id="+cars[i].id+"'>" 
+				+"<a title="+cars[i].car_type_id.series_id.brand_id.brand_name+" "+cars[i].car_type_id.series_id.series_name+" "+cars[i].car_type_id.type_name+" target='_blank' class='imgtype' href='/Car/index/detail.jsp?id="+cars[i].id+"'>" 
 				+"<span class='hover-bg'></span> <img width='290' height='192'"
 				+"src='/Car/img/"+cars[i].id+"/1.jpg'"+" alt="+cars[i].car_type_id.type_name+"> </a>"
 				+"<p class='infoBox'>"
-				+"<a title="+cars[i].car_type_id.type_name+" href='/Car/index/detail.jsp?id="+cars[i].id+"' target='_blank' class='info-title'>"+cars[i].car_type_id.type_name+"</a></p>"
+				+"<a title="+cars[i].car_type_id.series_id.brand_id.brand_name+" "+cars[i].car_type_id.series_id.series_name+" "+cars[i].car_type_id.type_name+" href='/Car/index/detail.jsp?id="+cars[i].id+"' target='_blank' class='info-title'>"+cars[i].car_type_id.series_id.brand_id.brand_name+" "+cars[i].car_type_id.series_id.series_name+" "+cars[i].car_type_id.type_name+"</a></p>"
 				+"<p class='fc-gray'><span>"+cars[i].car_license_date+"上牌</span> <em class='shuxian'>|</em>行驶"+cars[i].car_metre+"万公里</p>"
 				+"<p class='priType-s'><span><i class='fc-org priType'>"+cars[i].car_price+"</i>万</span></p>"
 				+"</div></li>" ;
@@ -61,8 +61,8 @@ function mOut(obj) {
 						<div class="poa top-title">
 							<h1>更好的二手车，更好的购车体验</h1>
 							<div class="top-info">
-								259项严苛检测 , 无重大事故&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TT陪同看车 ,
-								1年放心质保 <a target="_blank" href="/sh/intro/"
+								259项严苛检测 , 无重大事故&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;花生陪同看车 ,
+								1年放心质保 <a target="_blank" href="javascript:void(0);"
 									onmouseover="mOver(this)" onmouseout="mOut(this)">了解详情</a>
 							</div>
 						</div>
@@ -100,19 +100,9 @@ function mOut(obj) {
 	<div class="listbody">
 		<div class="w">
 			<div class="title">
-				<span class=" f14 fr"> <a href="/sh/buy/">查看全部</a><em
+				<span class=" f14 fr"> <a href="/Car/index/showAllCar.jsp">查看全部</a><em
 					class="more">&gt;&gt;</em> </span> <span class="ti-left"> <strong>已为您找到全城靠谱好车</strong>
-					<a href="/sh/buy" class="" data-role="tabSelect" data-cate="0">猜您喜欢</a>
-					<span class="ddd">|</span> <a href="/sh/buy/" data-role="tabSelect"
-					data-cate="1" class="">最新上架</a> <span class="ddd">|</span> <a
-					href="/sh/buy/r_3/" data-role="tabSelect" data-cate="2" class="">降价急售</a>
-					<span class="ddd">|</span> <a href="/sh/buy/l1g1r_4/"
-					data-role="tabSelect" data-cate="3" class="">准新车</a> <span
-					class="ddd">|</span> <a href="/sh/buy/p3/" data-role="tabSelect"
-					class="on">练手车</a> <span class="ddd">|</span> <a href="/sh/buy/h2/"
-					data-role="tabSelect" data-cate="5" class="">SUV</a> <span
-					class="ddd">|</span> <a href="/sh/buy/r_2/" data-role="tabSelect"
-					data-cate="6" class="">女车主</a> </span>
+					 </span>
 			</div>
 
 			<div data-role="showList">

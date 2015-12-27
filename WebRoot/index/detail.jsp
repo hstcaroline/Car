@@ -27,7 +27,7 @@
 							var car = eval("(" + datas + ")");
 							$("#leftImg").html(
 											"<img src='/Car/img/"+car.id+"/1.jpg'"+" alt='"+car.car_type_id.type_name+"'>")
-							$("#car_title").html(car.car_type_id.type_name);
+							$("#car_title").html(car.car_type_id.series_id.brand_id.brand_name+" "+car.car_type_id.series_id.series_name+" "+car.car_type_id.type_name);
 							$("#oldPrice").html(car.car_price);
 							$("#newCarPrice").html(
 									car.car_type_id.new_car_price);
@@ -137,9 +137,9 @@
 												success: function (data) {
 													if(data!=null)
 													{
-														alert("预约成功，您将在近日收到010-10101010的来电，请注意接听"+userId);
+														alert("预约成功，您将在近日收到400-100-1100的来电，请注意接听"+userId);
 													}
-													 location.reload();
+													 location.href="/Car/index/showAllCar.jsp";
 												} 
 											})
 										}
